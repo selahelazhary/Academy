@@ -3,57 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إختبارات سلاح الازهري</title>
+    <title>اختبارات سلاح الازهري</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: Arial, sans-serif;
         }
         body, html {
             height: 100%;
+            width: 100%;
             overflow: hidden;
-        }
-        .container {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .header {
-            background: #2c3e50;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-        .content {
-            flex: 1;
-            position: relative;
+            background: #000;
         }
         iframe {
             width: 100%;
             height: 100%;
             border: none;
         }
-        .loading {
-            position: absolute;
+        .loader {
+            position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
+            background: #000;
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
-            background: #f8f9fa;
+            color: white;
+            font-family: Arial, sans-serif;
             z-index: 1000;
+            flex-direction: column;
         }
         .spinner {
             width: 50px;
             height: 50px;
-            border: 5px solid #ddd;
-            border-top: 5px solid #3498db;
+            border: 5px solid rgba(255, 255, 255, 0.3);
             border-radius: 50%;
+            border-top: 5px solid #4cc9f0;
             animation: spin 1s linear infinite;
             margin-bottom: 20px;
         }
@@ -63,95 +51,102 @@
         }
         .error {
             display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1001;
             text-align: center;
             padding: 20px;
-            background: #ffecec;
-            border: 1px solid #f5aca6;
-            border-radius: 5px;
-            margin: 20px;
         }
         .error button {
-            background: #3498db;
-            color: white;
+            background: #4cc9f0;
+            color: #000;
             border: none;
             padding: 10px 20px;
             border-radius: 5px;
             cursor: pointer;
-            margin-top: 15px;
-        }
-        .instructions {
-            background: #e7f5ff;
-            padding: 15px;
-            border-radius: 5px;
-            margin: 15px;
-            display: none;
+            margin-top: 20px;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="container">
- 
-        
-        <div class="content">
-            <div class="loading">
-                <div class="spinner"></div>
-                <p>جاري تحميل المحتوى، يرجى الانتظار...</p>
-            </div>
-            
-            <div class="error" id="errorMsg">
-                <h3>⚠️ تعذر تحميل المحتوى</h3>
-
-                </div>
-                <button onclick="tryAgain()">إعادة المحاولة</button>
-            </div>
-            
-            <iframe id="mainFrame" src="index_quwez.html" onload="hideLoader()" onerror="showError()"></iframe>
-        </div>
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
+        <p>جاري التحميل الآمن...</p>
     </div>
 
+    <div class="error" id="error">
+        <h2>⚠️ حدث خطأ في التحميل</h2>
+        <p id="errorMsg">تعذر تحميل المحتوى المطلوب</p>
+        <button onclick="location.reload()">إعادة المحاولة</button>
+    </div>
+
+    <iframe id="contentFrame" style="display:none;"></iframe>
+
     <script>
-        // إخفاء شاشة التحميل عند تحميل المحتوى
-        function hideLoader() {
-            document.querySelector('.loading').style.display = 'none';
-        }
+   
+        const encryptedFileName = 'aW5kZXhfcXV3ZXouaHRtbA==';
         
-        // إظهار رسالة الخطأ
-        function showError() {
-            document.querySelector('.loading').style.display = 'none';
-            document.getElementById('errorMsg').style.display = 'block';
-            document.querySelector('.instructions').style.display = 'block';
+        // وظيفة فك التشفير
+        function decryptFileName(encrypted) {
+            try {
+                // فك تشفير Base64
+                return atob(encrypted);
+            } catch (error) {
+                console.error('خطأ في فك التشفير:', error);
+                return null;
+            }
+        }
+
+        // تحميل المحتوى بعد فك التشفير
+        function loadContent() {
+            const fileName = decryptFileName(encryptedFileName);
             
-            // محاولة تحديد سبب الخطأ
+            if (!fileName) {
+                showError('خطأ في فك تشفير الملف');
+                return;
+            }
+
+            const frame = document.getElementById('contentFrame');
+            
+            // إعداد معالجات الأحداث للإطار
+            frame.onload = function() {
+                // إخفاء Loader عند التحميل الناجح
+                document.getElementById('loader').style.display = 'none';
+                frame.style.display = 'block';
+            };
+            
+            frame.onerror = function() {
+                showError('تعذر تحميل الملف: ' + fileName);
+            };
+            
+            // تعيين مصدر الإطار بعد فك التشفير
+            frame.src = fileName;
+            
+            // وقت انتظار لأقصى مدة تحميل (10 ثواني)
             setTimeout(function() {
-                fetch('index_quwez.html')
-                .then(response => {
-                    if (response.status === 404) {
-                        document.getElementById('errorDetails').textContent = 
-                            'الملف غير موجود (خطأ 404). .';
-                    } else if (response.status === 200) {
-                        document.getElementById('errorDetails').textContent = 
-                            'التحقق من ان الانتر نت يعمل .';
-                    }
-                })
-                .catch(error => {
-                    document.getElementById('errorDetails').textContent = 
-                        'الموقع معطل مؤقتا.';
-                });
-            }, 1000);
+                if (frame.style.display === 'none') {
+                    showError('استغرق التحميل وقتًا طويلاً');
+                }
+            }, 10000);
         }
         
-        // إعادة المحاولة
-        function tryAgain() {
-            document.getElementById('errorMsg').style.display = 'none';
-            document.querySelector('.loading').style.display = 'flex';
-            // إضافة طابع زمني عشوائي للتأكد من إعادة التحميل
-            document.getElementById('mainFrame').src = 'index_quwez.html?' + new Date().getTime();
+        function showError(message) {
+            document.getElementById('loader').style.display = 'none';
+            document.getElementById('errorMsg').textContent = message;
+            document.getElementById('error').style.display = 'flex';
         }
         
-        // إخفاء التحميل تلقائياً بعد 8 ثوانٍ كحد أقصى
-        setTimeout(function() {
-            document.querySelector('.loading').style.display = 'none';
-        }, 8000);
+        // بدء تحميل المحتوى عند تحميل الصفحة
+        window.onload = loadContent;
     </script>
 </body>
 </html>
