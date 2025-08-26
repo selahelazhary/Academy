@@ -1,0 +1,3662 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>إختبارات سلاح الأزهري - نظام الاختبارات الإلكترونية</title>
+    <meta name="description" content="نظام متكامل للاختبارات الإلكترونية لطلبة الأزهر الشريف بجميع المراحل التعليمية">
+    <meta name="keywords" content="اختبارات, الأزهر, تعليم, اختبارات إلكترونية, سلاح الأزهري">
+    <meta name="author" content="إختبارات سلاح الأزهري">
+    <link rel="icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdyuIMWOk4qbKO_qCaKOHo859JMs3To_OJjpQ8u5fU0ULewA-AdNp7Izuv9PUOIOTGTUsNM6DTVVbRWKe2OEDTBcHnxOnOrCylsq_V3YhUFPqTkPJ7XOuzWzbCXKW-UnoLEwqsE8XjaHiWPZu2dC_pESia4uQOATzelupKDAUbuO1_jH2003wsgUO0PPiO/s1080/Selah%20Elazhary%20Transperant%20logo.png">
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+    :root {
+        --primary-color: #4361ee;
+        --primary-light: #6d8aff;
+        --primary-dark: #2a49c7;
+        --secondary-color: #3f37c9;
+        --success-color: #4cc9f0;
+        --success-dark: #2ab7e0;
+        --danger-color: #f72585;
+        --danger-dark: #d90d6d;
+        --warning-color: #f8961e;
+        --light-color: #f8f9fa;
+        --dark-color: #212529;
+        --gray-color: #6c757d;
+        --light-gray: #e9ecef;
+        --border-color: #dee2e6;
+        --azhar-color: #4361ee;
+        --azhar-dark: #3f37c9;
+        --correct-color: #4caf50;
+        --incorrect-color: #f44336;
+        --gold-color: #FFD700;
+        --silver-color: #C0C0C0;
+        --bronze-color: #CD7F32;
+        --admin-primary: #1a1a2e;
+        --admin-secondary: #16213e;
+        --admin-accent: #0f3460;
+        --admin-success: #00b894;
+        --admin-danger: #d63031;
+        --admin-warning: #fdcb6e;
+        --admin-text: #e2e2e2;
+        --admin-border: #2d4059;
+        --login-primary: #4a6fa5;
+        --login-secondary: #166088;
+        --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        --box-shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.12);
+        --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        --border-radius: 12px;
+        --border-radius-lg: 16px;
+        --whatsapp-color: #25D366;
+        --ad-color: #FF9800;
+        --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+        --gradient-success: linear-gradient(135deg, var(--success-color), #38b6ff);
+        --gradient-danger: linear-gradient(135deg, var(--danger-color), #ff2e95);
+        --gradient-warning: linear-gradient(135deg, var(--warning-color), #ffaa33);
+        --gradient-admin: linear-gradient(135deg, var(--admin-primary), var(--admin-accent));
+        --text-primary: #2d3748;
+        --text-secondary: #718096;
+        --card-bg: #ffffff;
+    }
+    
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: 'Tajawal', 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    
+    body {
+        background: linear-gradient(135deg, #f5f7fa 0%, #e4e9f2 100%);
+        color: var(--text-primary);
+        line-height: 1.6;
+        min-height: 100vh;
+        position: relative;
+        overflow-x: hidden;
+    }
+    
+    /* شاشة التحميل المعدلة */
+    .splash-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: var(--gradient-primary);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+        transition: opacity 0.5s ease;
+    }
+    
+    .splash-logo {
+        width: 150px;
+        height: 150px;
+        margin-bottom: 25px;
+        animation: pulse 1.5s infinite ease-in-out, float 3s infinite ease-in-out;
+        filter: drop-shadow(0 5px 15px rgba(0, 0, 0, 0.2));
+    }
+    
+    .splash-title {
+        color: white;
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 12px;
+        text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        letter-spacing: 0.5px;
+    }
+    
+    .splash-subtitle {
+        color: rgba(255, 255, 255, 0.85);
+        font-size: 1.1rem;
+        margin-bottom: 40px;
+        max-width: 500px;
+        text-align: center;
+        line-height: 1.5;
+    }
+    
+    .splash-loader {
+        width: 80%;
+        max-width: 320px;
+        height: 10px;
+        background-color: rgba(255, 255, 255, 0.2);
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .splash-progress {
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, rgba(255,255,255,0.8), rgba(255,255,255,1));
+        border-radius: 10px;
+        transition: width 1s cubic-bezier(0.65, 0, 0.35, 1);
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.05); opacity: 0.9; }
+        100% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-10px); }
+        100% { transform: translateY(0px); }
+    }
+    
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 25px 20px;
+        animation: fadeIn 0.8s ease-out;
+    }
+    
+    /* Header Styles - معدل */
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
+        margin-bottom: 35px;
+        position: relative;
+        background: var(--card-bg);
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow);
+        padding: 15px 25px;
+    }
+    
+    .logo-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        cursor: pointer;
+        transition: var(--transition);
+        text-decoration: none;
+    }
+    
+    .logo-container:hover {
+        transform: translateY(-3px);
+    }
+    
+    .logo {
+        font-size: 2.2rem;
+        font-weight: 800;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        user-select: none;
+        letter-spacing: -0.5px;
+    }
+    
+    .logo-img {
+        height: 55px;
+        transition: var(--transition);
+        filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.1));
+    }
+    
+    .logo-container:hover .logo-img {
+        transform: rotate(-10deg) scale(1.05);
+    }
+    
+    /* Card Styles - معدل بشكل كبير */
+    .card {
+        background: var(--card-bg);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--box-shadow);
+        padding: 28px;
+        transition: var(--transition);
+        border: none;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 5px;
+        height: 100%;
+        background: var(--gradient-primary);
+        opacity: 0;
+        transition: var(--transition);
+    }
+    
+    .card:hover {
+        box-shadow: var(--box-shadow-lg);
+        transform: translateY(-8px);
+    }
+    
+    .card:hover::before {
+        opacity: 1;
+    }
+    
+    /* Year Selection - معدل */
+    .year-selection {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 25px;
+        margin-bottom: 35px;
+    }
+    
+    .year-card, .section-card, .subject-card, .branch-card {
+        background: var(--card-bg);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--box-shadow);
+        padding: 30px 25px;
+        text-align: center;
+        cursor: pointer;
+        transition: var(--transition);
+        border: none;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 18px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .year-card::after, .section-card::after, .subject-card::after, .branch-card::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: var(--gradient-primary);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.3s ease;
+    }
+    
+    .year-card:hover, .section-card:hover, .subject-card:hover, .branch-card:hover {
+        box-shadow: var(--box-shadow-lg);
+        transform: translateY(-8px);
+    }
+    
+    .year-card:hover::after, .section-card:hover::after, .subject-card:hover::after, .branch-card:hover::after {
+        transform: scaleX(1);
+    }
+    
+    .year-card i, .section-card i, .subject-card i, .branch-card i {
+        font-size: 48px;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        transition: var(--transition);
+    }
+    
+    .year-card h3, .section-card h3, .subject-card h3, .branch-card h3 {
+        font-size: 1.4rem;
+        margin-bottom: 8px;
+        font-weight: 700;
+        color: var(--text-primary);
+    }
+    
+    .year-card p, .section-card p, .subject-card p, .branch-card p {
+        color: var(--text-secondary);
+        font-size: 0.95rem;
+        line-height: 1.5;
+    }
+    
+    .year-card.selected, .section-card.selected, .subject-card.selected, .branch-card.selected {
+        background: var(--gradient-primary);
+        color: white;
+        transform: scale(1.02);
+    }
+    
+    .year-card.selected i, .section-card.selected i, .subject-card.selected i, .branch-card.selected i,
+    .year-card.selected p, .section-card.selected p, .subject-card.selected p, .branch-card.selected p {
+        color: white;
+        -webkit-text-fill-color: white;
+    }
+    
+    .year-card.selected::after, .section-card.selected::after, .subject-card.selected::after, .branch-card.selected::after {
+        display: none;
+    }
+    
+    /* Quiz Container - معدل */
+    .quiz-container {
+        background: var(--card-bg);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--box-shadow);
+        padding: 30px;
+        margin-bottom: 35px;
+        display: none;
+        animation: slideUp 0.5s ease-out;
+    }
+    
+    .quiz-header {
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+    
+    .quiz-header h2 {
+        font-size: 1.8rem;
+        margin-bottom: 5px;
+        color: var(--primary-color);
+        font-weight: 700;
+    }
+    
+    .timer {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.1rem;
+        color: var(--primary-color);
+        background: rgba(67, 97, 238, 0.1);
+        padding: 10px 15px;
+        border-radius: 30px;
+        align-self: flex-start;
+    }
+    
+    .timer i {
+        font-size: 1.2rem;
+    }
+    
+    .timer.warning {
+        color: var(--warning-color);
+        background: rgba(248, 150, 30, 0.1);
+        animation: pulse 1s infinite;
+    }
+    
+    .timer.danger {
+        color: var(--danger-color);
+        background: rgba(247, 37, 133, 0.1);
+        animation: pulse 0.5s infinite;
+    }
+    
+    .progress-container {
+        width: 100%;
+        height: 10px;
+        background-color: var(--light-gray);
+        border-radius: 5px;
+        margin-top: 15px;
+        overflow: hidden;
+    }
+    
+    .progress-bar {
+        height: 100%;
+        background: var(--gradient-primary);
+        width: 0%;
+        transition: width 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(67, 97, 238, 0.3);
+    }
+    
+    /* Question Styles - معدل */
+    .question {
+        margin-bottom: 35px;
+        padding: 20px;
+        background: rgba(67, 97, 238, 0.03);
+        border-radius: var(--border-radius);
+        border-left: 4px solid var(--primary-color);
+    }
+    
+    .question h3 {
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+        line-height: 1.6;
+        color: var(--text-primary);
+        font-weight: 600;
+    }
+    
+    .question-number {
+        display: inline-flex;
+        width: 35px;
+        height: 35px;
+        background: var(--gradient-primary);
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 35px;
+        margin-left: 12px;
+        font-weight: 700;
+        box-shadow: 0 4px 8px rgba(67, 97, 238, 0.3);
+    }
+    
+    .options {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-top: 20px;
+    }
+    
+    .option {
+        padding: 18px 20px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: var(--transition);
+        position: relative;
+        display: flex;
+        align-items: center;
+        background: white;
+    }
+    
+    .option:hover {
+        background-color: rgba(67, 97, 238, 0.05);
+        border-color: var(--primary-light);
+        transform: translateX(5px);
+    }
+    
+    .option.selected {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-dark);
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+    }
+    
+    .option.correct {
+        background-color: rgba(76, 175, 80, 0.1);
+        border-color: var(--correct-color);
+        color: var(--text-primary);
+    }
+    
+    .option.incorrect {
+        background-color: rgba(244, 67, 54, 0.1);
+        border-color: var(--incorrect-color);
+        color: var(--text-primary);
+    }
+    
+    .option-icon {
+        margin-right: auto;
+        opacity: 0;
+        transition: var(--transition);
+        font-size: 1.2rem;
+    }
+    
+    .option.selected .option-icon,
+    .option.correct .option-icon,
+    .option.incorrect .option-icon {
+        opacity: 1;
+    }
+    
+    .option.correct .option-icon {
+        color: var(--correct-color);
+    }
+    
+    .option.incorrect .option-icon {
+        color: var(--incorrect-color);
+    }
+    
+    .true-false-options {
+        display: flex;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    
+    .true-false-btn {
+        flex: 1;
+        padding: 20px;
+        border: 1px solid var(--border-color);
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: var(--transition);
+        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        background: white;
+        font-weight: 600;
+    }
+    
+    .true-false-btn:hover {
+        background-color: rgba(67, 97, 238, 0.05);
+        border-color: var(--primary-light);
+        transform: translateY(-3px);
+    }
+    
+    .true-false-btn.selected {
+        background-color: var(--primary-color);
+        color: white;
+        border-color: var(--primary-dark);
+        box-shadow: 0 5px 15px rgba(67, 97, 238, 0.2);
+    }
+    
+    /* Navigation Buttons - معدل */
+    .navigation {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 35px;
+        gap: 15px;
+    }
+    
+    .btn {
+        padding: 14px 28px;
+        border: none;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: var(--transition);
+        font-weight: 600;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1rem;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .btn::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: 0.5s;
+    }
+    
+    .btn:hover::before {
+        left: 100%;
+    }
+    
+    .btn-primary {
+        background: var(--gradient-primary);
+        color: white;
+    }
+    
+    .btn-primary:hover {
+        box-shadow: 0 8px 20px rgba(67, 97, 238, 0.3);
+        transform: translateY(-3px);
+    }
+    
+    .btn-secondary {
+        background-color: var(--light-gray);
+        color: var(--dark-color);
+    }
+    
+    .btn-secondary:hover {
+        background-color: #d1d7e0;
+        box-shadow: 0 8px 20px rgba(108, 117, 125, 0.2);
+        transform: translateY(-3px);
+    }
+    
+    .btn-success {
+        background: var(--gradient-success);
+        color: white;
+    }
+    
+    .btn-success:hover {
+        box-shadow: 0 8px 20px rgba(76, 201, 240, 0.3);
+        transform: translateY(-3px);
+    }
+    
+    .btn-danger {
+        background: var(--gradient-danger);
+        color: white;
+    }
+    
+    .btn-danger:hover {
+        box-shadow: 0 8px 20px rgba(247, 37, 133, 0.3);
+        transform: translateY(-3px);
+    }
+    
+    .btn-warning {
+        background: var(--gradient-warning);
+        color: white;
+    }
+    
+    .btn-warning:hover {
+        box-shadow: 0 8px 20px rgba(248, 150, 30, 0.3);
+        transform: translateY(-3px);
+    }
+    
+    .btn-whatsapp {
+        background-color: var(--whatsapp-color);
+        color: white;
+    }
+    
+    .btn-whatsapp:hover {
+        background-color: #128C7E;
+        box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+        transform: translateY(-3px);
+    }
+    
+    .btn-ad {
+        background-color: var(--ad-color);
+        color: white;
+    }
+    
+    .btn-ad:hover {
+        background-color: #F57C00;
+        box-shadow: 0 8px 20px rgba(255, 152, 0, 0.3);
+        transform: translateY(-3px);
+    }
+    
+    .btn-sm {
+        padding: 10px 18px;
+        font-size: 0.9rem;
+    }
+    
+    /* Results Container - معدل */
+    .results-container {
+        background: var(--card-bg);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--box-shadow);
+        padding: 35px;
+        margin-bottom: 35px;
+        display: none;
+        text-align: center;
+        animation: scaleIn 0.5s ease-out;
+    }
+    
+    .results-container h2 {
+        font-size: 2.2rem;
+        margin-bottom: 30px;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        font-weight: 800;
+    }
+    
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 25px;
+        margin-bottom: 35px;
+    }
+    
+    .stat-item {
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: var(--border-radius);
+        padding: 25px 20px;
+        text-align: center;
+        transition: var(--transition);
+        border: 1px solid var(--border-color);
+    }
+    
+    .stat-item:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--box-shadow);
+    }
+    
+    .stat-value {
+        font-size: 2.8rem;
+        font-weight: 800;
+        color: var(--primary-color);
+        margin-bottom: 8px;
+        line-height: 1;
+    }
+    
+    .stat-label {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        font-weight: 600;
+    }
+    
+    .feedback {
+        text-align: right;
+        margin-bottom: 35px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 25px;
+        border-radius: var(--border-radius);
+        max-height: 400px;
+        overflow-y: auto;
+        border: 1px solid var(--border-color);
+    }
+    
+    .feedback h3 {
+        margin-bottom: 20px;
+        color: var(--primary-color);
+        font-size: 1.4rem;
+        padding-bottom: 10px;
+        border-bottom: 2px solid var(--primary-light);
+    }
+    
+    .feedback ul {
+        list-style-type: none;
+    }
+    
+    .feedback li {
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        border-bottom: 1px solid var(--border-color);
+        animation: fadeIn 0.5s ease-out;
+    }
+    
+    .feedback li:last-child {
+        border-bottom: none;
+        margin-bottom: 0;
+        padding-bottom: 0;
+    }
+    
+    /* Back Button - معدل */
+    .back-btn {
+        position: fixed;
+        bottom: 30px;
+        left: 30px;
+        width: 60px;
+        height: 60px;
+        background: var(--gradient-primary);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: var(--box-shadow-lg);
+        transition: var(--transition);
+        z-index: 100;
+        display: none;
+        animation: bounce 2s infinite;
+    }
+    
+    .back-btn:hover {
+        transform: scale(1.1) rotate(-5deg);
+        box-shadow: 0 10px 25px rgba(67, 97, 238, 0.4);
+    }
+    
+    .back-btn i {
+        font-size: 24px;
+    }
+    
+    @keyframes bounce {
+        0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+        40% {transform: translateY(-10px);}
+        60% {transform: translateY(-5px);}
+    }
+    
+    /* Admin Panel - New Design - معدل */
+    .admin-panel {
+        position: fixed;
+        top: 0;
+        left: -400px;
+        width: 400px;
+        height: 100vh;
+        background: var(--gradient-admin);
+        color: var(--admin-text);
+        z-index: 1000;
+        transition: var(--transition);
+        overflow-y: auto;
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.5);
+        display: none;
+    }
+    
+    .admin-panel.active {
+        left: 0;
+        display: block;
+    }
+    
+    .admin-header {
+        padding: 25px;
+        background-color: rgba(15, 52, 96, 0.8);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        backdrop-filter: blur(10px);
+    }
+    
+    .admin-header h2 {
+        font-size: 1.4rem;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin: 0;
+        font-weight: 700;
+    }
+    
+    .close-admin {
+        background: none;
+        border: none;
+        color: var(--admin-text);
+        font-size: 24px;
+        cursor: pointer;
+        transition: var(--transition);
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .close-admin:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: var(--admin-danger);
+        transform: rotate(90deg);
+    }
+    
+    .admin-sidebar {
+        width: 80px;
+        background-color: rgba(22, 33, 62, 0.8);
+        height: calc(100vh - 80px);
+        position: fixed;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding-top: 25px;
+        backdrop-filter: blur(10px);
+    }
+    
+    .admin-tab-btn {
+        width: 60px;
+        height: 60px;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 15px;
+        cursor: pointer;
+        transition: var(--transition);
+        color: var(--admin-text);
+        background-color: transparent;
+        border: none;
+        position: relative;
+    }
+    
+    .admin-tab-btn:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
+    }
+    
+    .admin-tab-btn.active {
+        background-color: var(--admin-accent);
+        color: white;
+        box-shadow: 0 5px 15px rgba(15, 52, 96, 0.4);
+    }
+    
+    .admin-tab-btn i {
+        font-size: 24px;
+    }
+    
+    .admin-tab-btn .tooltip {
+        position: absolute;
+        left: 70px;
+        background: rgba(0, 0, 0, 0.8);
+        padding: 8px 12px;
+        border-radius: 4px;
+        font-size: 12px;
+        white-space: nowrap;
+        opacity: 0;
+        visibility: hidden;
+        transition: var(--transition);
+        pointer-events: none;
+    }
+    
+    .admin-tab-btn:hover .tooltip {
+        opacity: 1;
+        visibility: visible;
+        left: 80px;
+    }
+    
+    .admin-content {
+        margin-right: 80px;
+        padding: 25px;
+    }
+    
+    .admin-tab-content {
+        display: none;
+        animation: fadeIn 0.3s ease-out;
+    }
+    
+    .admin-tab-content.active {
+        display: block;
+    }
+    
+    .admin-card {
+        background-color: rgba(22, 33, 62, 0.6);
+        border-radius: var(--border-radius);
+        padding: 25px;
+        margin-bottom: 25px;
+        border: 1px solid var(--admin-border);
+        backdrop-filter: blur(10px);
+        transition: var(--transition);
+    }
+    
+    .admin-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    .admin-card h3 {
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 1px solid var(--admin-border);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.2rem;
+    }
+    
+    .admin-form {
+        margin-bottom: 30px;
+    }
+    
+    .form-group {
+        margin-bottom: 20px;
+    }
+    
+    .form-group label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: rgba(236, 240, 241, 0.9);
+    }
+    
+    .form-control {
+        width: 100%;
+        padding: 14px 16px;
+        border: 1px solid var(--admin-border);
+        border-radius: var(--border-radius);
+        background-color: rgba(255, 255, 255, 0.05);
+        color: var(--admin-text);
+        transition: var(--transition);
+        font-size: 15px;
+    }
+    
+    .form-control:focus {
+        outline: none;
+        border-color: var(--admin-accent);
+        box-shadow: 0 0 0 3px rgba(15, 52, 96, 0.3);
+        background-color: rgba(255, 255, 255, 0.08);
+    }
+    
+    textarea.form-control {
+        min-height: 120px;
+        resize: vertical;
+    }
+    
+    .option-input {
+        margin-bottom: 12px;
+    }
+    
+    .btn-admin {
+        background-color: var(--admin-accent);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        border-radius: var(--border-radius);
+        cursor: pointer;
+        transition: var(--transition);
+        font-weight: 600;
+    }
+    
+    .btn-admin:hover {
+        background-color: #0d2a4a;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(15, 52, 96, 0.4);
+    }
+    
+    .questions-list {
+        margin-top: 30px;
+    }
+    
+    .question-item {
+        background-color: rgba(22, 33, 62, 0.5);
+        border-radius: var(--border-radius);
+        padding: 20px;
+        margin-bottom: 20px;
+        border: 1px solid var(--admin-border);
+        transition: var(--transition);
+    }
+    
+    .question-item:hover {
+        background-color: rgba(22, 33, 62, 0.7);
+        transform: translateX(5px);
+    }
+    
+    .question-item h4 {
+        margin-bottom: 15px;
+        font-size: 1.1rem;
+        line-height: 1.5;
+    }
+    
+    .question-meta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-bottom: 15px;
+        font-size: 14px;
+        color: rgba(236, 240, 241, 0.7);
+    }
+    
+    .question-meta span {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(0, 0, 0, 0.2);
+        padding: 5px 10px;
+        border-radius: 20px;
+    }
+    
+    .question-meta i {
+        font-size: 14px;
+    }
+    
+    .options-list {
+        margin-top: 15px;
+        margin-bottom: 15px;
+    }
+    
+    .option-item {
+        padding: 10px 12px;
+        background-color: rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+        margin-bottom: 8px;
+        font-size: 14px;
+        transition: var(--transition);
+    }
+    
+    .option-item:hover {
+        background-color: rgba(0, 0, 0, 0.15);
+    }
+    
+    .correct-option {
+        background-color: rgba(0, 184, 148, 0.2);
+        border-left: 3px solid var(--admin-success);
+    }
+    
+    .question-actions {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: 15px;
+        gap: 10px;
+    }
+    
+    .admin-filters {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 15px;
+        margin-bottom: 25px;
+    }
+    
+    .admin-filters .form-control {
+        font-size: 14px;
+        padding: 10px 12px;
+    }
+    
+    .admin-stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        gap: 20px;
+        margin-bottom: 30px;
+    }
+    
+    .admin-stat-card {
+        background-color: rgba(22, 33, 62, 0.6);
+        border-radius: var(--border-radius);
+        padding: 20px;
+        text-align: center;
+        border: 1px solid var(--admin-border);
+        transition: var(--transition);
+        backdrop-filter: blur(10px);
+    }
+    
+    .admin-stat-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+    
+    .admin-stat-value {
+        font-size: 2.5rem;
+        font-weight: 800;
+        margin-bottom: 8px;
+        color: var(--admin-accent);
+    }
+    
+    .admin-stat-label {
+        font-size: 14px;
+        color: rgba(236, 240, 241, 0.7);
+        font-weight: 600;
+    }
+    
+    .setting-item {
+        margin-bottom: 25px;
+    }
+    
+    .setting-label {
+        display: block;
+        margin-bottom: 10px;
+        font-weight: 600;
+        color: rgba(236, 240, 241, 0.9);
+    }
+    
+    .switch-container {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        margin-bottom: 8px;
+    }
+    
+    .switch-label {
+        font-weight: 500;
+    }
+    
+    .admin-switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+    }
+    
+    .admin-switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+    
+    .admin-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 34px;
+    }
+    
+    .admin-slider:before {
+        position: absolute;
+        content: "";
+        height: 22px;
+        width: 22px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+    
+    input:checked + .admin-slider {
+        background-color: var(--admin-success);
+    }
+    
+    input:checked + .admin-slider:before {
+        transform: translateX(30px);
+    }
+    
+    .admin-message {
+        padding: 15px 18px;
+        border-radius: var(--border-radius);
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        animation: fadeIn 0.3s ease;
+        backdrop-filter: blur(10px);
+    }
+    
+    .success-message {
+        background-color: rgba(0, 184, 148, 0.2);
+        color: var(--admin-success);
+        border-left: 3px solid var(--admin-success);
+    }
+    
+    .error-message {
+        background-color: rgba(214, 48, 49, 0.2);
+        color: var(--admin-danger);
+        border-left: 3px solid var(--admin-danger);
+    }
+    
+    /* Modal Styles - معدل */
+    .password-modal, .subject-modal, .login-modal, .register-modal, .ad-modal, .section-modal, .edit-modal {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.7);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        z-index: 2000;
+        backdrop-filter: blur(5px);
+        animation: fadeIn 0.3s ease;
+    }
+    
+    .modal-box {
+        background-color: white;
+        border-radius: var(--border-radius-lg);
+        padding: 30px;
+        width: 90%;
+        max-width: 450px;
+        box-shadow: var(--box-shadow-lg);
+        animation: modalSlideIn 0.3s ease-out;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .modal-box::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 5px;
+        background: var(--gradient-primary);
+    }
+    
+    .modal-box h3 {
+        margin-bottom: 25px;
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--text-primary);
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+    
+    .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 15px;
+        margin-top: 25px;
+    }
+    
+    /* Loading Overlay - معدل */
+    .loading-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.8);
+        display: none;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 3000;
+        color: white;
+        backdrop-filter: blur(10px);
+    }
+    
+    .spinner {
+        width: 60px;
+        height: 60px;
+        border: 5px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+        border-top-color: white;
+        animation: spin 1s ease-in-out infinite;
+        margin-bottom: 20px;
+    }
+    
+    .loading-text {
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+    }
+    
+    .loading-dots::after {
+        content: '';
+        animation: dots 1.5s infinite;
+    }
+    
+    @keyframes dots {
+        0%, 20% { content: '.'; }
+        40% { content: '..'; }
+        60%, 100% { content: '...'; }
+    }
+    
+    /* Overlay - معدل */
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6);
+        z-index: 999;
+        display: none;
+        backdrop-filter: blur(5px);
+    }
+    
+    .overlay.active {
+        display: block;
+        animation: fadeIn 0.3s ease;
+    }
+    
+    /* No Questions Message - معدل */
+    .no-questions {
+        text-align: center;
+        padding: 40px 30px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        border-radius: var(--border-radius);
+        margin-bottom: 25px;
+        border: 1px solid var(--border-color);
+    }
+    
+    .no-questions i {
+        font-size: 50px;
+        background: var(--gradient-primary);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 20px;
+    }
+    
+    .no-questions h3 {
+        margin-bottom: 15px;
+        color: var(--text-primary);
+        font-size: 1.5rem;
+    }
+    
+    .no-questions p {
+        color: var(--text-secondary);
+        line-height: 1.6;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+    
+    /* Category Filter - معدل */
+    .category-filter {
+        margin-bottom: 25px;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+        padding: 20px;
+        border-radius: var(--border-radius);
+        border: 1px solid var(--border-color);
+    }
+    
+    .category-filter label {
+        margin-left: 12px;
+        font-weight: 600;
+        color: var(--text-primary);
+    }
+    
+    /* Branch Selection - معدل */
+    .branch-selection {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 25px;
+        margin-bottom: 35px;
+    }
+    
+    /* User Profile - معدل */
+    .user-profile {
+        position: relative;
+        cursor: pointer;
+    }
+    
+    .user-avatar {
+        width: 45px;
+        height: 45px;
+        background: var(--gradient-primary);
+        color: white;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+        font-weight: 700;
+        box-shadow: 0 4px 10px rgba(67, 97, 238, 0.3);
+        transition: var(--transition);
+    }
+    
+    .user-profile:hover .user-avatar {
+        transform: scale(1.1);
+        box-shadow: 0 6px 15px rgba(67, 97, 238, 0.4);
+    }
+    
+    /* Login Floating Message - معدل */
+    .login-floating {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: var(--gradient-primary);
+        color: white;
+        padding: 18px 24px;
+        border-radius: var(--border-radius);
+        box-shadow: var(--box-shadow-lg);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        z-index: 100;
+        cursor: pointer;
+        transition: var(--transition);
+        animation: pulse 2s infinite;
+    }
+    
+    .login-floating:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 25px rgba(67, 97, 238, 0.4);
+        animation: none;
+    }
+    
+    /* Secure Badge - معدل */
+    .secure-badge {
+        position: fixed;
+        bottom: 25px;
+        right: 25px;
+        background: var(--gradient-success);
+        color: white;
+        padding: 10px 18px;
+        border-radius: 30px;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 100;
+        box-shadow: var(--box-shadow);
+        transition: var(--transition);
+    }
+    
+    .secure-badge:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(76, 201, 240, 0.3);
+    }
+    
+    /* Error Boundary - معدل */
+    .error-boundary {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: white;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 30px;
+        z-index: 9999;
+        display: none;
+        text-align: center;
+    }
+    
+    .error-boundary i {
+        font-size: 60px;
+        background: var(--gradient-danger);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 25px;
+    }
+    
+    .error-boundary h2 {
+        margin-bottom: 20px;
+        color: var(--danger-color);
+        font-size: 1.8rem;
+    }
+    
+    .error-boundary p {
+        margin-bottom: 30px;
+        text-align: center;
+        max-width: 500px;
+        color: var(--text-secondary);
+        line-height: 1.6;
+    }
+    
+    /* Ad Container - معدل */
+    .ad-container {
+        background: var(--card-bg);
+        border-radius: var(--border-radius-lg);
+        box-shadow: var(--box-shadow);
+        padding: 20px;
+        margin-bottom: 25px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        border: 1px solid var(--border-color);
+        transition: var(--transition);
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .ad-container::before {
+        content: 'إعلان';
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        background: var(--gradient-warning);
+        color: white;
+        font-size: 10px;
+        padding: 3px 8px;
+        border-radius: 15px;
+        font-weight: 700;
+    }
+    
+    .ad-container:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--box-shadow-lg);
+    }
+    
+    .ad-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: var(--border-radius);
+        margin-bottom: 15px;
+        transition: var(--transition);
+    }
+    
+    .ad-container:hover .ad-image {
+        transform: scale(1.03);
+    }
+    
+    .ad-title {
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin-bottom: 10px;
+        color: var(--text-primary);
+    }
+    
+    .ad-description {
+        font-size: 0.95rem;
+        color: var(--text-secondary);
+        margin-bottom: 15px;
+        line-height: 1.5;
+    }
+    
+    .ad-whatsapp-btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 20px;
+        background-color: var(--whatsapp-color);
+        color: white;
+        border-radius: var(--border-radius);
+        text-decoration: none;
+        transition: var(--transition);
+        font-weight: 600;
+    }
+    
+    .ad-whatsapp-btn:hover {
+        background-color: #128C7E;
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(37, 211, 102, 0.3);
+    }
+    
+    /* Responsive Styles - معدل */
+    @media (max-width: 768px) {
+        .year-selection {
+            grid-template-columns: 1fr;
+        }
+        
+        .branch-selection {
+            grid-template-columns: 1fr;
+        }
+        
+        .stats {
+            grid-template-columns: 1fr;
+        }
+        
+        .stat-item {
+            width: 100%;
+        }
+        
+        .admin-panel {
+            width: 100%;
+            left: -100%;
+        }
+        
+        .admin-filters {
+            grid-template-columns: 1fr;
+        }
+        
+        .admin-stats-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .true-false-options {
+            flex-direction: column;
+        }
+        
+        .admin-sidebar {
+            width: 70px;
+        }
+        
+        .admin-content {
+            margin-right: 70px;
+        }
+        
+        .navigation {
+            flex-direction: column;
+        }
+        
+        .btn {
+            width: 100%;
+            justify-content: center;
+        }
+        
+        .modal-box {
+            width: 95%;
+            padding: 25px 20px;
+        }
+        
+        header {
+            flex-direction: column;
+            gap: 15px;
+            text-align: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+        }
+        
+        .logo-img {
+            height: 45px;
+        }
+        
+        .splash-title {
+            font-size: 2rem;
+        }
+        
+        .splash-subtitle {
+            font-size: 1rem;
+            padding: 0 20px;
+        }
+    }
+    
+    /* Animations - تمت إضافة المزيد */
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+    
+    @keyframes slideUp {
+        from { 
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to { 
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    @keyframes scaleIn {
+        from { 
+            opacity: 0;
+            transform: scale(0.9);
+        }
+        to { 
+            opacity: 1;
+            transform: scale(1);
+        }
+    }
+    
+    @keyframes modalSlideIn {
+        from { 
+            opacity: 0;
+            transform: translateY(-30px) scale(0.95);
+        }
+        to { 
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+    }
+    
+    /* Medal Styles - معدل */
+    .fa-medal {
+        font-size: 28px;
+        margin-right: 8px;
+        filter: drop-shadow(0 2px 3px rgba(0, 0, 0, 0.2));
+    }
+    
+    .gold {
+        color: var(--gold-color);
+    }
+    
+    .silver {
+        color: var(--silver-color);
+    }
+    
+    .bronze {
+        color: var(--bronze-color);
+    }
+    
+    /* Print Styles - معدل */
+    @media print {
+        .no-print, .back-btn, .admin-panel, .overlay, .password-modal, .subject-modal, .secure-badge, .login-floating {
+            display: none !important;
+        }
+        
+        .results-container {
+            display: block !important;
+            box-shadow: none;
+            border: none;
+            padding: 0;
+        }
+        
+        .feedback {
+            max-height: none;
+            overflow: visible;
+        }
+        
+        .card, .quiz-container, .results-container {
+            break-inside: avoid;
+        }
+        
+        body {
+            background: white !important;
+        }
+    }
+    
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+        width: 10px;
+    }
+    
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb {
+        background: var(--primary-light);
+        border-radius: 10px;
+    }
+    
+    ::-webkit-scrollbar-thumb:hover {
+        background: var(--primary-color);
+    }
+    
+    .admin-panel::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.1);
+    }
+    
+    .admin-panel::-webkit-scrollbar-thumb {
+        background: var(--admin-accent);
+    }
+    
+    .admin-panel::-webkit-scrollbar-thumb:hover {
+        background: var(--admin-primary);
+    }
+</style>
+</head>
+<body>
+    <!-- شاشة التحميل -->
+    <div class="splash-screen" id="splash-screen">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdyuIMWOk4qbKO_qCaKOHo859JMs3To_OJjpQ8u5fU0ULewA-AdNp7Izuv9PUOIOTGTUsNM6DTVVbRWKe2OEDTBcHnxOnOrCylsq_V3YhUFPqTkPJ7XOuzWzbCXKW-UnoLEwqsE8XjaHiWPZu2dC_pESia4uQOATzelupKDAUbuO1_jH2003wsgUO0PPiO/s1080/Selah%20Elazhary%20Transperant%20logo.png" alt="Logo" class="splash-logo">
+        <h1 class="splash-title">إختبارات سلاح الأزهري</h1>
+        <p class="splash-subtitle">نظام الاختبارات الإلكترونية</p>
+        <div class="splash-loader">
+            <div class="splash-progress" id="splash-progress"></div>
+        </div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <div class="logo-container" id="logo-container">
+                <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdyuIMWOk4qbKO_qCaKOHo859JMs3To_OJjpQ8u5fU0ULewA-AdNp7Izuv9PUOIOTGTUsNM6DTVVbRWKe2OEDTBcHnxOnOrCylsq_V3YhUFPqTkPJ7XOuzWzbCXKW-UnoLEwqsE8XjaHiWPZu2dC_pESia4uQOATzelupKDAUbuO1_jH2003wsgUO0PPiO/s1080/Selah%20Elazhary%20Transperant%20logo.png" alt="Logo" class="logo-img">
+                <div class="logo">إختبارات سلاح الأزهري</div>
+            </div>
+        </header>
+
+
+
+        <!-- عرض الإعلان إذا كان موجودًا -->
+
+
+       
+        <div id="year-selection-container" class="year-selection">
+         <h2 style="color: #2c3e50; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center; padding: 20px; background: #f8f9fa; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); position: relative;">
+  قم بإختيار السنه الدراسيه
+  <div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 80px; height: 4px; background: linear-gradient(90deg, #2196F3, #1976D2); border-radius: 2px;"></div>
+</h2>
+            <!-- المرحلة الإعدادية -->
+            <div class="year-card" data-year="prep1">
+                <i class="fas fa-award"></i>
+                <h3>الصف الأول الإعدادي</h3>
+                <p>إختبارات خاصة بالصف الأول الإعدادي الأزهري</p>
+            </div>
+            <div class="year-card" data-year="prep2">
+                <i class="fas fa-medal"></i>
+                <h3>الصف الثاني الإعدادي</h3>
+                <p>إختبارات خاصة بالصف الثاني الإعدادي الأزهري</p>
+            </div>
+            <div class="year-card" data-year="prep3">
+                <i class="fas fa-trophy"></i>
+                <h3>الصف الثالث الإعدادي</h3>
+                <p>إختبارات خاصة بالصف الثالث الإعدادي الأزهري</p>
+            </div>
+            
+            <!-- المرحلة الثانوية -->
+            <div class="year-card" data-year="first">
+                <i class="fas fa-award"></i>
+                <h3>الصف الأول الثانوي</h3>
+                <p>إختبارات خاصة بالصف الأول الثانوي الأزهري</p>
+            </div>
+            <div class="year-card" data-year="second">
+                <i class="fas fa-medal"></i>
+                <h3>الصف الثاني الثانوي</h3>
+                <p>إختبارات خاصة بالصف الثاني الثانوي الأزهري</p>
+            </div>
+            <div class="year-card" data-year="third">
+                <i class="fas fa-trophy"></i>
+                <h3>الصف الثالث الثانوي</h3>
+                <p>إختبارات خاصة بالالصف الثالث الثانوي الأزهري</p>
+            </div>
+        </div>
+        
+        <div id="section-selection-container" class="section-selection" style="display: none;">
+            <!-- سيتم ملؤها ديناميكيًا بناءً على الصف المختار -->
+        </div>
+        
+        <div id="subject-selection-container" class="subject-selection" style="display: none;">
+            <!-- سيتم ملؤها ديناميكيًا بناءً على القسم المختار -->
+        </div>
+        
+        <div class="quiz-container" id="quiz-container" style="display: none;">
+            <div class="loading-overlay" id="quiz-loading">
+                <div class="spinner"></div>
+                <div class="loading-text">جاري تحميل الإختبارات...</div>
+            </div>
+            
+            <div class="quiz-header">
+                <h2 id="quiz-title">اختبار إختبارات سلاح الأزهري</h2>
+                <div class="timer" id="timer">
+                    <i class="fas fa-clock"></i>
+                    <span>الوقت المتبقي: 10:00</span>
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar" id="progress-bar"></div>
+                </div>
+            </div>
+            
+            <div class="category-filter" id="category-filter" style="display: none;">
+                <label for="category-select">تصفية الإختبارات حسب التصنيف:</label>
+                <select id="category-select" class="form-control">
+                    <option value="all">جميع التصنيفات</option>
+                </select>
+            </div>
+            
+            <div id="question-container">
+                <!-- الإختبارات ستظهر هنا ديناميكيًا -->
+            </div>
+            
+            <div class="navigation">
+                <button class="btn btn-secondary" id="prev-btn" disabled>
+                    <i class="fas fa-arrow-right"></i> السابق
+                </button>
+                <button class="btn btn-primary" id="next-btn">
+                    التالي <i class="fas fa-arrow-left"></i>
+                </button>
+                <button class="btn btn-success" id="submit-btn" style="display: none;">
+                    <i class="fas fa-check-circle"></i> إظهار النتيجة
+                </button>
+            </div>
+        </div>
+        
+        <div class="results-container" id="results-container">
+            <h2>نتيجة الاختبار</h2>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-value" id="score-value">0</div>
+                    <div class="stat-label">الدرجة</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="percentage">0%</div>
+                    <div class="stat-label">النسبة المئوية</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value" id="time-taken">00:00</div>
+                    <div class="stat-label">الوقت المستغرق</div>
+                </div>
+            </div>
+            <div class="feedback" id="feedback"></div>
+            <button class="btn btn-primary" id="restart-btn">
+                <i class="fas fa-redo"></i> إعادة الاختبار
+            </button>
+        </div>
+    </div>
+    
+    <!-- زر الرجوع للخلف -->
+    <div class="back-btn" id="back-btn" style="display: none;">
+        <i class="fas fa-arrow-left"></i>
+    </div>
+    
+    <!-- لوحة التحكم العائمة - التصميم الجديد -->
+
+                            <!-- سيتم ملؤها ديناميكيًا -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- نافذة كلمة المرور الإدارية -->        <div id="ad-container" style="display: none;"></div>
+
+
+    
+    <!-- طبقة التعتيم -->
+    <div class="overlay" id="overlay"></div>
+    
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+    <script>
+        // تهيئة Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBMJe0CVmxCrFthFmJEs5W_p1x3AFpFmHQ",
+            authDomain: "moaz-a8190.firebaseapp.com",
+            databaseURL: "https://moaz-a8190-default-rtdb.firebaseio.com",
+            projectId: "moaz-a8190",
+            storageBucket: "moaz-a8190.appspot.com",
+            messagingSenderId: "839870478124",
+            appId: "1:839870478124:web:2d47a304ada17206179e89",
+            measurementId: "G-LEJLEHCMG4"
+        };
+        
+        // Initialize Firebase
+        const app = firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+        const auth = firebase.auth();
+        
+        // متغيرات التطبيق
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let questions = [];
+        let userAnswers = [];
+        let clickCount = 0;
+        let adminPassword = localStorage.getItem('adminPassword') || "gohary01010081147mo";
+        let categories = new Set();
+        let quizStartTime;
+        let timerInterval;
+        let timeLeft = 600;
+        let selectedYear = '';
+        let selectedSection = '';
+        let selectedSubject = '';
+        let subjects = [];
+        let examActive = true;
+        let defaultExamTime = 10;
+        let currentUser = null;
+        let savedState = JSON.parse(localStorage.getItem('quizState')) || {};
+        let telegramBotToken = localStorage.getItem('telegramBotToken') || '';
+        let telegramChatId = localStorage.getItem('telegramChatId') || '';
+        let sectionsConfig = {
+            prep1: ['arabic', 'islamic'],
+            prep2: ['arabic', 'islamic'],
+            prep3: ['arabic', 'islamic'],
+            first: ['scientific', 'literary'],
+            second: ['scientific', 'literary'],
+            third: ['scientific', 'literary']
+        };
+        let activeAd = null;
+        let siteSettings = {
+            title: "إختبارات سلاح الأزهري",
+            description: "نظام الاختبارات الإلكترونية",
+            keywords: "اختبارات, الأزهر, تعليم, اختبارات إلكترونية, سلاح الأزهري",
+            logo: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdyuIMWOk4qbKO_qCaKOHo859JMs3To_OJjpQ8u5fU0ULewA-AdNp7Izuv9PUOIOTGTUsNM6DTVVbRWKe2OEDTBcHnxOnOrCylsq_V3YhUFPqTkPJ7XOuzWzbCXKW-UnoLEwqsE8XjaHiWPZu2dC_pESia4uQOATzelupKDAUbuO1_jH2003wsgUO0PPiO/s1080/Selah%20Elazhary%20Transperant%20logo.png",
+            active: true,
+            maintenanceMessage: "نظام الاختبارات تحت الصيانة، الرجاء المحاولة لاحقاً"
+        };
+
+        // عناصر DOM
+        const elements = {
+            splashScreen: document.getElementById('splash-screen'),
+            splashProgress: document.getElementById('splash-progress'),
+            quizContainer: document.getElementById('quiz-container'),
+            questionContainer: document.getElementById('question-container'),
+            resultsContainer: document.getElementById('results-container'),
+            progressBar: document.getElementById('progress-bar'),
+            nextBtn: document.getElementById('next-btn'),
+            prevBtn: document.getElementById('prev-btn'),
+            submitBtn: document.getElementById('submit-btn'),
+            restartBtn: document.getElementById('restart-btn'),
+            quizTitle: document.getElementById('quiz-title'),
+            scoreDisplay: document.getElementById('score-value'),
+            percentageDisplay: document.getElementById('percentage'),
+            timeTakenDisplay: document.getElementById('time-taken'),
+            feedbackDisplay: document.getElementById('feedback'),
+            logoContainer: document.getElementById('logo-container'),
+            adminPanel: document.getElementById('admin-panel'),
+            closeAdmin: document.getElementById('close-admin'),
+            passwordModal: document.getElementById('password-modal'),
+            passwordInput: document.getElementById('admin-password'),
+            passwordSubmit: document.getElementById('password-submit'),
+            passwordCancel: document.getElementById('password-cancel'),
+            passwordError: document.getElementById('password-error'),
+            quizLoading: document.getElementById('quiz-loading'),
+            categoryFilter: document.getElementById('category-filter'),
+            categorySelect: document.getElementById('category-select'),
+            timerDisplay: document.getElementById('timer'),
+            overlay: document.getElementById('overlay'),
+            yearSelectionContainer: document.getElementById('year-selection-container'),
+            sectionSelectionContainer: document.getElementById('section-selection-container'),
+            subjectSelectionContainer: document.getElementById('subject-selection-container'),
+            yearCards: document.querySelectorAll('.year-card'),
+            backBtn: document.getElementById('back-btn'),
+            adminTabs: document.querySelectorAll('.admin-tab-btn'),
+            adminTabContents: document.querySelectorAll('.admin-tab-content'),
+            adContainer: document.getElementById('ad-container'),
+            
+            // عناصر لوحة الإدارة
+            questionType: document.getElementById('question-type'),
+            mcqOptions: document.getElementById('mcq-options'),
+            truefalseOptions: document.getElementById('truefalse-options'),
+            addQuestionBtn: document.getElementById('add-question-btn'),
+            questionsList: document.getElementById('questions-list'),
+            filterYear: document.getElementById('filter-year'),
+            filterSection: document.getElementById('filter-section'),
+            examTime: document.getElementById('exam-time'),
+            examStatus: document.getElementById('exam-status'),
+            adminPasswordSetting: document.getElementById('admin-password-setting'),
+            saveSettingsBtn: document.getElementById('save-settings-btn'),
+            telegramBotToken: document.getElementById('telegram-bot-token'),
+            telegramChatId: document.getElementById('telegram-chat-id'),
+            saveTelegramBtn: document.getElementById('save-telegram-btn'),
+            totalQuestions: document.getElementById('total-questions'),
+            totalQuizzes: document.getElementById('total-quizzes'),
+            avgScore: document.getElementById('avg-score'),
+            activeUsers: document.getElementById('active-users'),
+            recentResults: document.getElementById('recent-results'),
+            sectionYear: document.getElementById('section-year'),
+            sectionScientific: document.getElementById('section-scientific'),
+            sectionLiterary: document.getElementById('section-literary'),
+            sectionArabic: document.getElementById('section-arabic'),
+            sectionIslamic: document.getElementById('section-islamic'),
+            saveSectionsBtn: document.getElementById('save-sections-btn'),
+            adTitle: document.getElementById('ad-title'),
+            adDescription: document.getElementById('ad-description'),
+            adImage: document.getElementById('ad-image'),
+            adLinkType: document.getElementById('ad-link-type'),
+            adLink: document.getElementById('ad-link'),
+            adLinkContainer: document.getElementById('ad-link-container'),
+            adPosition: document.getElementById('ad-position'),
+            adSize: document.getElementById('ad-size'),
+            adDesign: document.getElementById('ad-design'),
+            adStatus: document.getElementById('ad-status'),
+            addAdBtn: document.getElementById('add-ad-btn'),
+            adsList: document.getElementById('ads-list'),
+            siteTitle: document.getElementById('site-title'),
+            siteDescription: document.getElementById('site-description'),
+            siteKeywords: document.getElementById('site-keywords'),
+            siteLogo: document.getElementById('site-logo'),
+            siteStatus: document.getElementById('site-status'),
+            maintenanceMessage: document.getElementById('maintenance-message'),
+            maintenanceMessageContainer: document.getElementById('maintenance-message-container'),
+            saveSiteSettingsBtn: document.getElementById('save-site-settings-btn'),
+            editSubjectName: document.getElementById('edit-subject-name'),
+            editSubjectYear: document.getElementById('edit-subject-year'),
+            editSubjectSection: document.getElementById('edit-subject-section'),
+            editSubjectIcon: document.getElementById('edit-subject-icon'),
+            addSubjectBtn: document.getElementById('add-subject-btn'),
+            subjectsList: document.getElementById('subjects-list')
+        };
+
+        // تهيئة التطبيق
+        function initApp() {
+            // إضافة حماية ضد النسخ والهجمات
+            addSecurityMeasures();
+            
+            simulateLoading();
+            setupEventListeners();
+            loadInitialSubjects();
+            checkExamStatus();
+            restoreSavedState();
+            loadTelegramSettings();
+            loadSectionsConfig();
+            loadActiveAd();
+            loadSiteSettings();
+            loadAdminData();
+            
+            window.addEventListener('beforeunload', saveCurrentState);
+        }
+        
+        // إضافة تدابير أمنية
+        function addSecurityMeasures() {
+            // منع نسخ المحتوى
+            document.addEventListener('copy', function(e) {
+                if (!e.target.closest('.admin-panel')) {
+                    e.preventDefault();
+                    alert('نسخ المحتوى غير مسموح به');
+                }
+            });
+            
+            // منع النقر الأيمن
+            document.addEventListener('contextmenu', function(e) {
+                if (!e.target.closest('.admin-panel')) {
+                    e.preventDefault();
+                    alert('النسخ غير مسموح به');
+                }
+            });
+            
+            // منع فتح أدوات المطورين
+            document.addEventListener('keydown', function(e) {
+                // F12
+                if (e.keyCode === 123) {
+                    e.preventDefault();
+                }
+                // Ctrl+Shift+I
+                if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+                    e.preventDefault();
+                }
+                // Ctrl+Shift+C
+                if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+                    e.preventDefault();
+                }
+                // Ctrl+U
+                if (e.ctrlKey && e.keyCode === 85) {
+                    e.preventDefault();
+                }
+            });
+            
+            // حماية ضد XSS
+            function sanitizeInput(input) {
+                const div = document.createElement('div');
+                div.textContent = input;
+                return div.innerHTML;
+            }
+            
+            // حماية ضد حقن SQL (على الرغم من أن Firebase NoSQL)
+            function sanitizeForDatabase(input) {
+                return input.replace(/[.$#\[\]\/]/g, '');
+            }
+        }
+        
+        // تحميل إعدادات الموقع
+        function loadSiteSettings() {
+            const settingsRef = database.ref('siteSettings');
+            settingsRef.once('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    siteSettings = snapshot.val();
+                    document.title = siteSettings.title;
+                    
+                    // تحديث واجهة الإدارة
+                    if (elements.siteTitle) {
+                        elements.siteTitle.value = siteSettings.title;
+                        elements.siteDescription.value = siteSettings.description;
+                        elements.siteKeywords.value = siteSettings.keywords;
+                        elements.siteLogo.value = siteSettings.logo;
+                        elements.siteStatus.checked = siteSettings.active;
+                        elements.maintenanceMessage.value = siteSettings.maintenanceMessage;
+                        elements.maintenanceMessageContainer.style.display = siteSettings.active ? 'none' : 'block';
+                    }
+                } else {
+                    settingsRef.set(siteSettings);
+                }
+            });
+        }
+        
+        // تحميل بيانات لوحة الإدارة
+        function loadAdminData() {
+            loadQuestionsForAdmin();
+            loadStats();
+            loadAds();
+            loadSubjectsForAdmin();
+        }
+        
+        // تحميل الأسئلة لوحة الإدارة
+        function loadQuestionsForAdmin() {
+            const questionsRef = database.ref('questions');
+            questionsRef.on('value', (snapshot) => {
+                elements.questionsList.innerHTML = '';
+                
+                snapshot.forEach((childSnapshot) => {
+                    const question = childSnapshot.val();
+                    question.id = childSnapshot.key;
+                    
+                    const questionItem = document.createElement('div');
+                    questionItem.className = 'question-item';
+                    questionItem.innerHTML = `
+                        <h4>${question.text}</h4>
+                        <div class="question-meta">
+                            <span><i class="fas fa-graduation-cap"></i> ${getYearText(question.year)}</span>
+                            <span><i class="fas fa-layer-group"></i> ${getSectionText(question.section)}</span>
+                            <span><i class="fas fa-book"></i> ${question.subject || 'عام'}</span>
+                            <span><i class="fas fa-star"></i> ${getDifficultyText(question.difficulty)}</span>
+                        </div>
+                        <div class="options-list">
+                            ${question.type === 'mcq' ? `
+                                <div class="option-item ${question.correctAnswer === '1' ? 'correct-option' : ''}">1. ${question.option1}</div>
+                                <div class="option-item ${question.correctAnswer === '2' ? 'correct-option' : ''}">2. ${question.option2}</div>
+                                ${question.option3 ? `<div class="option-item ${question.correctAnswer === '3' ? 'correct-option' : ''}">3. ${question.option3}</div>` : ''}
+                                ${question.option4 ? `<div class="option-item ${question.correctAnswer === '4' ? 'correct-option' : ''}">4. ${question.option4}</div>` : ''}
+                            ` : `
+                                <div class="option-item ${question.correctAnswer === 'true' ? 'correct-option' : ''}">${question.correctAnswer === 'true' ? 'صح' : 'خطأ'}</div>
+                            `}
+                        </div>
+                        <div class="question-actions">
+                            <button class="btn btn-sm btn-danger" onclick="deleteQuestion('${question.id}')">
+                                <i class="fas fa-trash"></i> حذف
+                            </button>
+                        </div>
+                    `;
+                    
+                    elements.questionsList.appendChild(questionItem);
+                });
+            });
+        }
+        
+        // تحميل الإحصائيات
+        function loadStats() {
+            // إحصائيات الأسئلة
+            const questionsRef = database.ref('questions');
+            questionsRef.once('value', (snapshot) => {
+                elements.totalQuestions.textContent = snapshot.numChildren();
+            });
+            
+            // إحصائيات النتائج
+            const resultsRef = database.ref('quizResults');
+            resultsRef.once('value', (snapshot) => {
+                elements.totalQuizzes.textContent = snapshot.numChildren();
+                
+                let totalScore = 0;
+                let count = 0;
+                
+                snapshot.forEach((childSnapshot) => {
+                    const result = childSnapshot.val();
+                    totalScore += result.percentage;
+                    count++;
+                });
+                
+                const avg = count > 0 ? Math.round(totalScore / count) : 0;
+                elements.avgScore.textContent = `${avg}%`;
+                
+                // عرض أحدث النتائج
+                elements.recentResults.innerHTML = '';
+                const recentResults = [];
+                
+                snapshot.forEach((childSnapshot) => {
+                    recentResults.push(childSnapshot.val());
+                });
+                
+                // ترتيب النتائج من الأحدث إلى الأقدم
+                recentResults.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
+                
+                // عرض آخر 5 نتائج
+                recentResults.slice(0, 5).forEach(result => {
+                    const resultItem = document.createElement('div');
+                    resultItem.className = 'question-item';
+                    resultItem.innerHTML = `
+                        <h4>${result.userName}</h4>
+                        <div class="question-meta">
+                            <span><i class="fas fa-graduation-cap"></i> ${getYearText(result.year)}</span>
+                            <span><i class="fas fa-layer-group"></i> ${getSectionText(result.section)}</span>
+                            <span><i class="fas fa-book"></i> ${result.subject || 'عام'}</span>
+                            <span><i class="fas fa-chart-line"></i> ${result.percentage}%</span>
+                            <span><i class="fas fa-clock"></i> ${result.timeTaken}</span>
+                        </div>
+                    `;
+                    
+                    elements.recentResults.appendChild(resultItem);
+                });
+            });
+        }
+        
+        // تحميل الإعلانات
+        function loadAds() {
+            const adsRef = database.ref('ads');
+            adsRef.on('value', (snapshot) => {
+                elements.adsList.innerHTML = '';
+                
+                snapshot.forEach((childSnapshot) => {
+                    const ad = childSnapshot.val();
+                    ad.id = childSnapshot.key;
+                    
+                    const adItem = document.createElement('div');
+                    adItem.className = 'question-item';
+                    adItem.innerHTML = `
+                        <h4>${ad.title}</h4>
+                        <div class="question-meta">
+                            <span><i class="fas fa-circle" style="color: ${ad.status === 'active' ? '#00b894' : '#d63031'}"></i> ${ad.status === 'active' ? 'نشط' : 'غير نشط'}</span>
+                            <span><i class="fas fa-calendar"></i> ${new Date(ad.createdAt).toLocaleDateString('ar-EG')}</span>
+                            <span><i class="fas fa-map-marker-alt"></i> ${getAdPositionText(ad.position)}</span>
+                        </div>
+                        <p>${ad.description}</p>
+                        <div class="question-actions">
+                            <button class="btn btn-sm btn-danger" onclick="deleteAd('${ad.id}')">
+                                <i class="fas fa-trash"></i> حذف
+                            </button>
+                            <button class="btn btn-sm btn-admin" onclick="toggleAdStatus('${ad.id}', '${ad.status}')">
+                                <i class="fas fa-power-off"></i> ${ad.status === 'active' ? 'إيقاف' : 'تفعيل'}
+                            </button>
+                        </div>
+                    `;
+                    
+                    elements.adsList.appendChild(adItem);
+                });
+            });
+        }
+        
+        // تحميل المواد للإدارة
+        function loadSubjectsForAdmin() {
+            const subjectsRef = database.ref('subjects');
+            subjectsRef.on('value', (snapshot) => {
+                elements.subjectsList.innerHTML = '';
+                
+                snapshot.forEach((childSnapshot) => {
+                    const subject = childSnapshot.val();
+                    subject.id = childSnapshot.key;
+                    
+                    const subjectItem = document.createElement('div');
+                    subjectItem.className = 'question-item';
+                    subjectItem.innerHTML = `
+                        <h4><i class="fas ${subject.icon}"></i> ${subject.name}</h4>
+                        <div class="question-meta">
+                            <span><i class="fas fa-graduation-cap"></i> ${getYearText(subject.year)}</span>
+                            <span><i class="fas fa-layer-group"></i> ${getSectionText(subject.section)}</span>
+                        </div>
+                        <div class="question-actions">
+                            <button class="btn btn-sm btn-danger" onclick="deleteSubject('${subject.id}')">
+                                <i class="fas fa-trash"></i> حذف
+                            </button>
+                        </div>
+                    `;
+                    
+                    elements.subjectsList.appendChild(subjectItem);
+                });
+            });
+        }
+        
+        // حذف سؤال
+        function deleteQuestion(questionId) {
+            if (confirm('هل أنت متأكد من حذف هذا السؤال؟')) {
+                database.ref('questions/' + questionId).remove()
+                    .then(() => {
+                        alert('تم حذف السؤال بنجاح');
+                    })
+                    .catch(error => {
+                        alert('حدث خطأ أثناء حذف السؤال: ' + error.message);
+                    });
+            }
+        }
+        
+        // حذف إعلان
+        function deleteAd(adId) {
+            if (confirm('هل أنت متأكد من حذف هذا الإعلان؟')) {
+                database.ref('ads/' + adId).remove()
+                    .then(() => {
+                        alert('تم حذف الإعلان بنجاح');
+                    })
+                    .catch(error => {
+                        alert('حدث خطأ أثناء حذف الإعلان: ' + error.message);
+                    });
+            }
+        }
+        
+        // تبديل حالة الإعلان
+        function toggleAdStatus(adId, currentStatus) {
+            const newStatus = currentStatus === 'active' ? 'inactive' : 'active';
+            
+            database.ref('ads/' + adId + '/status').set(newStatus)
+                .then(() => {
+                    alert(`تم ${newStatus === 'active' ? 'تفعيل' : 'إيقاف'} الإعلان بنجاح`);
+                })
+                .catch(error => {
+                    alert('حدث خطأ أثناء تغيير حالة الإعلان: ' + error.message);
+                });
+        }
+        
+        // حذف مادة
+        function deleteSubject(subjectId) {
+            if (confirm('هل أنت متأكد من حذف هذه المادة؟')) {
+                database.ref('subjects/' + subjectId).remove()
+                    .then(() => {
+                        alert('تم حذف المادة بنجاح');
+                    })
+                    .catch(error => {
+                        alert('حدث خطأ أثناء حذف المادة: ' + error.message);
+                    });
+            }
+        }
+        
+        // محاكاة عملية التحميل
+        function simulateLoading() {
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    setTimeout(() => {
+                        elements.splashScreen.style.opacity = '0';
+                        setTimeout(() => {
+                            elements.splashScreen.style.display = 'none';
+                            // بعد انتهاء الشاشة التمهيدية، عرض الشاشة الرئيسية مباشرة
+                            elements.yearSelectionContainer.style.display = 'grid';
+                        }, 500);
+                    }, 500);
+                }
+                elements.splashProgress.style.width = `${progress}%`;
+            }, 200);
+        }
+        
+        // تحميل الإعلان النشط
+        function loadActiveAd() {
+            const adsRef = database.ref('ads');
+            adsRef.orderByChild('status').equalTo('active').limitToLast(1).once('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    snapshot.forEach(childSnapshot => {
+                        activeAd = childSnapshot.val();
+                        showAd(activeAd);
+                    });
+                }
+            });
+        }
+        
+        // عرض الإعلان
+        function showAd(ad) {
+            if (!ad) return;
+            
+            let linkHtml = '';
+            if (ad.linkType && ad.link) {
+                switch(ad.linkType) {
+                    case 'whatsapp':
+                        linkHtml = `<a href="https://wa.me/${ad.link}" class="ad-whatsapp-btn" target="_blank">
+                            <i class="fab fa-whatsapp"></i> تواصل معنا عبر واتساب
+                        </a>`;
+                        break;
+                    case 'phone':
+                        linkHtml = `<a href="tel:${ad.link}" class="ad-whatsapp-btn" style="background-color: #4CAF50;">
+                            <i class="fas fa-phone"></i> اتصل بنا
+                        </a>`;
+                        break;
+                    case 'website':
+                        linkHtml = `<a href="${ad.link}" class="ad-whatsapp-btn" style="background-color: #2196F3;" target="_blank">
+                            <i class="fas fa-globe"></i> زور موقعنا
+                        </a>`;
+                        break;
+                    case 'telegram':
+                        linkHtml = `<a href="https://t.me/${ad.link}" class="ad-whatsapp-btn" style="background-color: #0088cc;" target="_blank">
+                            <i class="fab fa-telegram"></i> انضم إلى قناتنا
+                        </a>`;
+                        break;
+                }
+            }
+            
+            const adHtml = `
+                <div class="ad-container" style="${getAdStyle(ad)}">
+                    ${ad.image ? `<img src="${ad.image}" alt="${ad.title}" class="ad-image">` : ''}
+                    <h3 class="ad-title">${ad.title}</h3>
+                    <p class="ad-description">${ad.description}</p>
+                    ${linkHtml}
+                </div>
+            `;
+            
+            elements.adContainer.innerHTML = adHtml;
+            elements.adContainer.style.display = 'block';
+        }
+        
+        // الحصول على نمط الإعلان بناءً على إعداداته
+        function getAdStyle(ad) {
+            let style = '';
+            
+            // حجم الإعلان
+            switch(ad.size) {
+                case 'small':
+                    style += 'max-width: 300px; margin: 0 auto;';
+                    break;
+                case 'medium':
+                    style += 'max-width: 500px; margin: 0 auto;';
+                    break;
+                case 'large':
+                    style += 'max-width: 100%;';
+                    break;
+            }
+            
+            // تصميم الإعلان
+            switch(ad.design) {
+                case 'modern':
+                    style += 'background: linear-gradient(135deg, #f5f7fa, #e4e8f0); border: none; box-shadow: 0 5px 15px rgba(0,0,0,0.1);';
+                    break;
+                case 'classic':
+                    style += 'background: #fff; border: 2px solid #d1d7e0; box-shadow: 0 3px 10px rgba(0,0,0,0.08);';
+                    break;
+                case 'minimal':
+                    style += 'background: #f8f9fa; border: 1px dashed #dee2e6; box-shadow: none;';
+                    break;
+                default:
+                    style += 'background: white;';
+            }
+            
+            return style;
+        }
+        
+        // الحصول على نص مكان الإعلان
+        function getAdPositionText(position) {
+            switch(position) {
+                case 'top': return 'أعلى الصفحة';
+                case 'middle': return 'منتصف الصفحة';
+                case 'bottom': return 'أسفل الصفحة';
+                case 'sidebar': return 'الشريط الجانبي';
+                default: return position;
+            }
+        }
+        
+        // تحميل إعدادات التليجرام
+        function loadTelegramSettings() {
+            if (elements.telegramBotToken) {
+                elements.telegramBotToken.value = telegramBotToken;
+                elements.telegramChatId.value = telegramChatId;
+            }
+        }
+        
+        // تحميل تكوين الأقسام من Firebase
+        function loadSectionsConfig() {
+            const sectionsRef = database.ref('sectionsConfig');
+            sectionsRef.once('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    sectionsConfig = snapshot.val();
+                    
+                    // تحديث واجهة الإدارة
+                    if (elements.sectionYear) {
+                        updateSectionsUI();
+                    }
+                } else {
+                    sectionsRef.set(sectionsConfig);
+                }
+            });
+        }
+        
+        // تحديث واجهة إعدادات الأقسام
+        function updateSectionsUI() {
+            elements.sectionYear.addEventListener('change', function() {
+                const year = this.value;
+                elements.sectionScientific.checked = sectionsConfig[year].includes('scientific');
+                elements.sectionLiterary.checked = sectionsConfig[year].includes('literary');
+                elements.sectionArabic.checked = sectionsConfig[year].includes('arabic');
+                elements.sectionIslamic.checked = sectionsConfig[year].includes('islamic');
+            });
+            
+            // تعيين القيم الافتراضية
+            elements.sectionScientific.checked = sectionsConfig.prep1.includes('scientific');
+            elements.sectionLiterary.checked = sectionsConfig.prep1.includes('literary');
+            elements.sectionArabic.checked = sectionsConfig.prep1.includes('arabic');
+            elements.sectionIslamic.checked = sectionsConfig.prep1.includes('islamic');
+        }
+        
+        // استعادة الحالة المحفوظة
+        function restoreSavedState() {
+            if (savedState.selectedYear) {
+                selectedYear = savedState.selectedYear;
+                const yearCard = document.querySelector(`.year-card[data-year="${selectedYear}"]`);
+                if (yearCard) yearCard.click();
+            }
+        }
+        
+        // حفظ الحالة الحالية
+        function saveCurrentState() {
+            const state = {
+                user: currentUser,
+                selectedYear: selectedYear,
+                selectedSection: selectedSection,
+                selectedSubject: selectedSubject
+            };
+            localStorage.setItem('quizState', JSON.stringify(state));
+        }
+        
+        // إعداد مستمعي الأحداث
+        function setupEventListeners() {
+            // اختيار الصف الدراسي
+            elements.yearCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    selectedYear = this.dataset.year;
+                    elements.yearSelectionContainer.style.display = 'none';
+                    elements.sectionSelectionContainer.style.display = 'flex';
+                    elements.backBtn.style.display = 'flex';
+                    
+                    const yearText = getYearText(selectedYear);
+                    elements.quizTitle.textContent = `اختبار إختبارات سلاح الأزهري - ${yearText}`;
+                    
+                    loadSections(selectedYear);
+                    saveCurrentState();
+                });
+            });
+            
+            // زر الرجوع للخلف
+            elements.backBtn.addEventListener('click', function() {
+                if (elements.subjectSelectionContainer.style.display === 'grid') {
+                    elements.subjectSelectionContainer.style.display = 'none';
+                    elements.sectionSelectionContainer.style.display = 'flex';
+                    selectedSubject = '';
+                } else if (elements.sectionSelectionContainer.style.display === 'flex') {
+                    elements.sectionSelectionContainer.style.display = 'none';
+                    elements.yearSelectionContainer.style.display = 'grid';
+                    elements.backBtn.style.display = 'none';
+                    selectedSection = '';
+                } else if (elements.quizContainer.style.display === 'block') {
+                    elements.quizContainer.style.display = 'none';
+                    if (selectedSubject) {
+                        elements.subjectSelectionContainer.style.display = 'grid';
+                    } else {
+                        elements.sectionSelectionContainer.style.display = 'flex';
+                    }
+                }
+                
+                saveCurrentState();
+            });
+            
+            // الانتقال إلى السؤال التالي
+            elements.nextBtn.addEventListener('click', nextQuestion);
+            
+            // العودة إلى السؤال السابق
+            elements.prevBtn.addEventListener('click', prevQuestion);
+            
+            // إرسال الاختبار
+            elements.submitBtn.addEventListener('click', submitQuiz);
+            
+            // إعادة الاختبار
+            elements.restartBtn.addEventListener('click', restartQuiz);
+            
+            // الوصول إلى لوحة التحكم الإدارية
+            elements.logoContainer.addEventListener('click', function() {
+                clickCount++;
+                
+                if (clickCount === 5) {
+                    showPasswordModal();
+                    clickCount = 0;
+                }
+                
+                setTimeout(() => {
+                    if (clickCount > 0) clickCount--;
+                }, 3000);
+            });
+            
+            // إغلاق لوحة التحكم
+            elements.closeAdmin.addEventListener('click', closeAdminPanel);
+            
+            // التحقق من كلمة المرور
+            elements.passwordSubmit.addEventListener('click', checkAdminPassword);
+            
+            // إلغاء نافذة كلمة المرور
+            elements.passwordCancel.addEventListener('click', function() {
+                elements.passwordModal.style.display = 'none';
+                elements.passwordInput.value = '';
+                elements.passwordError.style.display = 'none';
+            });
+            
+            // السماح بالدخول بالزر Enter في حقل كلمة المرور
+            elements.passwordInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    elements.passwordSubmit.click();
+                }
+            });
+            
+            // تصفية الإختبارات حسب التصنيف
+            elements.categorySelect.addEventListener('change', function() {
+                filterQuestionsByCategory(this.value);
+            });
+            
+            // تبديل بين تبويبات لوحة التحكم
+            elements.adminTabs.forEach(tab => {
+                tab.addEventListener('click', function() {
+                    switchAdminTab(this.dataset.tab);
+                });
+            });
+            
+            // تغيير نوع السؤال في لوحة الإدارة
+            if (elements.questionType) {
+                elements.questionType.addEventListener('change', function() {
+                    if (this.value === 'mcq') {
+                        elements.mcqOptions.style.display = 'block';
+                        elements.truefalseOptions.style.display = 'none';
+                    } else {
+                        elements.mcqOptions.style.display = 'none';
+                        elements.truefalseOptions.style.display = 'block';
+                    }
+                });
+            }
+            
+            // إضافة سؤال جديد
+            if (elements.addQuestionBtn) {
+                elements.addQuestionBtn.addEventListener('click', addNewQuestion);
+            }
+            
+            // حفظ إعدادات النظام
+            if (elements.saveSettingsBtn) {
+                elements.saveSettingsBtn.addEventListener('click', saveSystemSettings);
+            }
+            
+            // حفظ إعدادات التليجرام
+            if (elements.saveTelegramBtn) {
+                elements.saveTelegramBtn.addEventListener('click', saveTelegramSettings);
+            }
+            
+            // حفظ إعدادات الأقسام
+            if (elements.saveSectionsBtn) {
+                elements.saveSectionsBtn.addEventListener('click', saveSectionsSettings);
+            }
+            
+            // إضافة إعلان جديد
+            if (elements.addAdBtn) {
+                elements.addAdBtn.addEventListener('click', addNewAd);
+            }
+            
+            // حفظ إعدادات الموقع
+            if (elements.saveSiteSettingsBtn) {
+                elements.saveSiteSettingsBtn.addEventListener('click', saveSiteSettings);
+            }
+            
+            // إضافة مادة جديدة
+            if (elements.addSubjectBtn) {
+                elements.addSubjectBtn.addEventListener('click', addNewSubject);
+            }
+            
+            // تغيير حالة الموقع
+            if (elements.siteStatus) {
+                elements.siteStatus.addEventListener('change', function() {
+                    elements.maintenanceMessageContainer.style.display = this.checked ? 'none' : 'block';
+                });
+            }
+            
+            // تصفية الأسئلة في لوحة الإدارة
+            if (elements.filterYear && elements.filterSection) {
+                elements.filterYear.addEventListener('change', loadQuestionsForAdmin);
+                elements.filterSection.addEventListener('change', loadQuestionsForAdmin);
+            }
+            
+            // التحكم في ظهور حقل الرابط بناءً على نوع الرابط
+            if (elements.adLinkType) {
+                elements.adLinkType.addEventListener('change', function() {
+                    if (this.value === 'none') {
+                        elements.adLinkContainer.style.display = 'none';
+                    } else {
+                        elements.adLinkContainer.style.display = 'block';
+                    }
+                });
+            }
+        }
+        
+        // تحميل الأقسام بناءً على الصف المختار
+        function loadSections(year) {
+            elements.sectionSelectionContainer.innerHTML = '';
+            
+            if (sectionsConfig[year]) {
+                sectionsConfig[year].forEach(section => {
+                    const sectionCard = document.createElement('div');
+                    sectionCard.className = 'section-card';
+                    sectionCard.dataset.section = section;
+                    sectionCard.innerHTML = `
+                        <i class="fas ${getSectionIcon(section)}"></i>
+                        <h3>${getSectionText(section)}</h3>
+                        <p>إختبارات خاصة بقسم ${getSectionText(section)}</p>
+                    `;
+                    elements.sectionSelectionContainer.appendChild(sectionCard);
+                    
+                    sectionCard.addEventListener('click', function() {
+                        document.querySelectorAll('.section-card').forEach(c => c.classList.remove('selected'));
+                        this.classList.add('selected');
+                        selectedSection = this.dataset.section;
+                        
+                        const sectionText = getSectionText(selectedSection);
+                        elements.quizTitle.textContent += ` - ${sectionText}`;
+                        
+                        loadSubjects(selectedSection);
+                        saveCurrentState();
+                    });
+                });
+            }
+        }
+        
+        // تحميل المواد الأولية
+        function loadInitialSubjects() {
+            const subjectsRef = database.ref('subjects');
+            subjectsRef.once('value', (snapshot) => {
+                if (!snapshot.exists()) {
+                    addDefaultSubjects();
+                }
+            });
+        }
+        
+        // تحميل المواد من Firebase
+        function loadSubjects(section) {
+            const subjectsRef = database.ref('subjects');
+            subjectsRef.on('value', (snapshot) => {
+                subjects = [];
+                elements.subjectSelectionContainer.innerHTML = '';
+                
+                snapshot.forEach((childSnapshot) => {
+                    const subject = childSnapshot.val();
+                    if (subject.section === section) {
+                        subjects.push(subject);
+                        
+                        const subjectCard = document.createElement('div');
+                        subjectCard.className = 'subject-card';
+                        subjectCard.dataset.subject = subject.name;
+                        subjectCard.innerHTML = `
+                            <i class="fas ${subject.icon}"></i>
+                            <h3>${subject.name}</h3>
+                        `;
+                        
+                        subjectCard.addEventListener('click', function() {
+                            document.querySelectorAll('.subject-card').forEach(c => c.classList.remove('selected'));
+                            this.classList.add('selected');
+                            selectedSubject = this.dataset.subject;
+                            
+                            elements.quizTitle.textContent += ` - ${selectedSubject}`;
+                            
+                            setTimeout(() => {
+                                elements.subjectSelectionContainer.style.display = 'none';
+                                elements.quizContainer.style.display = 'block';
+                                loadQuestions();
+                            }, 500);
+                            
+                            saveCurrentState();
+                        });
+                        
+                        elements.subjectSelectionContainer.appendChild(subjectCard);
+                    }
+                });
+                
+                if (subjects.length > 0) {
+                    elements.sectionSelectionContainer.style.display = 'none';
+                    elements.subjectSelectionContainer.style.display = 'grid';
+                } else {
+                    elements.sectionSelectionContainer.style.display = 'none';
+                    elements.quizContainer.style.display = 'block';
+                    loadQuestions();
+                }
+            });
+        }
+        
+        // تحميل الإختبارات من Firebase
+        function loadQuestions() {
+            elements.quizLoading.style.display = 'flex';
+            elements.questionContainer.innerHTML = '';
+            
+            const questionsRef = database.ref('questions');
+            questionsRef.once('value', (snapshot) => {
+                questions = [];
+                categories = new Set(['all']);
+                
+                snapshot.forEach((childSnapshot) => {
+                    const question = childSnapshot.val();
+                    question.id = childSnapshot.key;
+                    
+                    if (question.year === selectedYear && 
+                        question.section === selectedSection && 
+                        (!selectedSubject || question.subject === selectedSubject)) {
+                        questions.push(question);
+                        
+                        if (question.category) {
+                            categories.add(question.category);
+                        }
+                    }
+                });
+                
+                updateCategoryFilters();
+                
+                if (questions.length > 0) {
+                    startQuiz();
+                } else {
+                    showNoQuestionsMessage();
+                }
+                
+                elements.quizLoading.style.display = 'none';
+            });
+        }
+        
+        // تصفية الإختبارات حسب التصنيف
+        function filterQuestionsByCategory(selectedCategory) {
+            if (selectedCategory === 'all') {
+                loadQuestions();
+                return;
+            }
+            
+            elements.quizLoading.style.display = 'flex';
+            elements.questionContainer.innerHTML = '';
+            
+            const filteredQuestions = questions.filter(q => q.category === selectedCategory);
+            
+            if (filteredQuestions.length > 0) {
+                questions = filteredQuestions;
+                currentQuestionIndex = 0;
+                score = 0;
+                userAnswers = Array(questions.length).fill(null);
+                showQuestion();
+                updateProgressBar();
+            } else {
+                showNoQuestionsMessage();
+            }
+            
+            elements.quizLoading.style.display = 'none';
+        }
+        
+        // عرض رسالة عدم وجود إختبارات
+        function showNoQuestionsMessage() {
+            elements.questionContainer.innerHTML = `
+                <div class="no-questions">
+                    <i class="fas fa-info-circle"></i> لا توجد إختبارات متاحة حالياً للصف والقسم المحدد. الرجاء المحاولة لاحقاً.
+                </div>
+            `;
+            elements.nextBtn.style.display = 'none';
+            elements.submitBtn.style.display = 'none';
+        }
+        
+        // تحديث قوائم التصنيفات
+        function updateCategoryFilters() {
+            elements.categorySelect.innerHTML = '';
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category === 'all' ? 'جميع التصنيفات' : category;
+                elements.categorySelect.appendChild(option);
+            });
+            
+            elements.categoryFilter.style.display = categories.size > 2 ? 'block' : 'none';
+        }
+        
+        // بدء الاختبار
+        function startQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            userAnswers = Array(questions.length).fill(null);
+            showQuestion();
+            updateProgressBar();
+            startTimer();
+            elements.quizContainer.style.display = 'block';
+            elements.resultsContainer.style.display = 'none';
+            elements.backBtn.style.display = 'flex';
+        }
+        
+        // بدء المؤقت
+        function startTimer() {
+            quizStartTime = new Date();
+            clearInterval(timerInterval);
+            timeLeft = defaultExamTime * 60;
+            
+            updateTimerDisplay();
+            
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+        
+        // تحديث عرض المؤقت
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            elements.timerDisplay.querySelector('span').textContent = `الوقت المتبقي: ${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+            
+            if (timeLeft <= 120) {
+                elements.timerDisplay.style.color = 'var(--incorrect-color)';
+            } else {
+                elements.timerDisplay.style.color = 'var(--azhar-color)';
+            }
+        }
+        
+        // إيقاف المؤقت
+        function stopTimer() {
+            clearInterval(timerInterval);
+        }
+        
+        // حساب الوقت المستغرق
+        function calculateTimeTaken() {
+            const endTime = new Date();
+            const timeDiff = endTime - quizStartTime;
+            
+            const minutes = Math.floor(timeDiff / 60000);
+            const seconds = Math.floor((timeDiff % 60000) / 1000);
+            
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+        }
+        
+        // عرض السؤال الحالي
+        function showQuestion() {
+            if (currentQuestionIndex >= questions.length) {
+                submitQuiz();
+                return;
+            }
+            
+            const question = questions[currentQuestionIndex];
+            let questionHTML = '';
+            
+            questionHTML += `
+                <div class="question">
+                    <h3><span class="question-number">${currentQuestionIndex + 1}</span> ${question.text}</h3>
+                    ${question.difficulty ? `<p><small>مستوى الصعوبة: ${getDifficultyText(question.difficulty)}</small></p>` : ''}
+            `;
+            
+            if (question.type === 'mcq') {
+                questionHTML += `<div class="options">`;
+                
+                for (let i = 1; i <= 4; i++) {
+                    const option = question[`option${i}`];
+                    if (!option) continue;
+                    
+                    const isSelected = userAnswers[currentQuestionIndex] === i.toString();
+                    questionHTML += `
+                        <div class="option ${isSelected ? 'selected' : ''}" data-answer="${i}">
+                            ${option}
+                            <i class="fas fa-check option-icon"></i>
+                        </div>
+                    `;
+                }
+                
+                questionHTML += `</div>`;
+            } else {
+                questionHTML += `
+                    <div class="true-false-options">
+                        <div class="true-false-btn ${userAnswers[currentQuestionIndex] === 'true' ? 'selected' : ''}" data-answer="true">
+                            <i class="fas fa-check"></i> صح
+                        </div>
+                        <div class="true-false-btn ${userAnswers[currentQuestionIndex] === 'false' ? 'selected' : ''}" data-answer="false">
+                            <i class="fas fa-times"></i> خطأ
+                        </div>
+                    </div>
+                `;
+            }
+            
+            questionHTML += `</div>`;
+            elements.questionContainer.innerHTML = questionHTML;
+            
+            // إضافة مستمعين للأحداث للخيارات
+            if (question.type === 'mcq') {
+                const options = document.querySelectorAll('.option');
+                options.forEach(option => {
+                    option.addEventListener('click', () => {
+                        options.forEach(opt => opt.classList.remove('selected'));
+                        option.classList.add('selected');
+                        userAnswers[currentQuestionIndex] = option.dataset.answer;
+                    });
+                });
+            } else {
+                const trueFalseBtns = document.querySelectorAll('.true-false-btn');
+                trueFalseBtns.forEach(btn => {
+                    btn.addEventListener('click', () => {
+                        trueFalseBtns.forEach(b => b.classList.remove('selected'));
+                        btn.classList.add('selected');
+                        userAnswers[currentQuestionIndex] = btn.dataset.answer;
+                    });
+                });
+            }
+            
+            // تحديث حالة الأزرار
+            elements.prevBtn.disabled = currentQuestionIndex === 0;
+            elements.nextBtn.style.display = currentQuestionIndex < questions.length - 1 ? 'flex' : 'none';
+            elements.submitBtn.style.display = currentQuestionIndex === questions.length - 1 ? 'flex' : 'none';
+        }
+        
+        // الحصول على نص مستوى الصعوبة
+        function getDifficultyText(difficulty) {
+            switch(difficulty) {
+                case 'easy': return 'سهل';
+                case 'medium': return 'متوسط';
+                case 'hard': return 'صعب';
+                default: return '';
+            }
+        }
+        
+        // تحديث شريط التقدم
+        function updateProgressBar() {
+            const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
+            elements.progressBar.style.width = `${progress}%`;
+        }
+        
+        // الانتقال إلى السؤال التالي
+        function nextQuestion() {
+            if (currentQuestionIndex < questions.length - 1) {
+                currentQuestionIndex++;
+                showQuestion();
+                updateProgressBar();
+            }
+        }
+        
+        // العودة إلى السؤال السابق
+        function prevQuestion() {
+            if (currentQuestionIndex > 0) {
+                currentQuestionIndex--;
+                showQuestion();
+                updateProgressBar();
+            }
+        }
+        
+        // إرسال الاختبار
+        function submitQuiz() {
+            stopTimer();
+            showResults();
+        }
+        
+        // عرض النتائج
+        function showResults() {
+            score = 0;
+            let feedbackHTML = '<h3>التصحيح:</h3><ul>';
+            
+            questions.forEach((question, index) => {
+                const userAnswer = userAnswers[index];
+                const isCorrect = userAnswer === question.correctAnswer;
+                
+                if (isCorrect) {
+                    score++;
+                }
+                
+                feedbackHTML += `<li>
+                    <strong>السؤال ${index + 1}:</strong> ${question.text}<br>
+                    <span style="color: ${isCorrect ? 'green' : 'red'}">
+                        إجابتك: ${formatAnswer(question, userAnswer)} - 
+                        ${isCorrect ? 'صحيح' : 'خطأ (الإجابة الصحيحة: ' + formatAnswer(question, question.correctAnswer) + ')'}
+                    </span>
+                </li><br>`;
+            });
+            
+            feedbackHTML += '</ul>';
+            
+            elements.quizContainer.style.display = 'none';
+            elements.resultsContainer.style.display = 'block';
+            elements.scoreDisplay.textContent = score;
+            
+            const percentage = Math.round((score / questions.length) * 100);
+            elements.percentageDisplay.textContent = `${percentage}%`;
+            
+            let medal = '';
+            if (percentage >= 90) {
+                medal = '<i class="fas fa-medal gold"></i>';
+            } else if (percentage >= 75) {
+                medal = '<i class="fas fa-medal silver"></i>';
+            } else if (percentage >= 50) {
+                medal = '<i class="fas fa-medal bronze"></i>';
+            }
+            elements.percentageDisplay.innerHTML += ` ${medal}`;
+            
+            elements.timeTakenDisplay.textContent = calculateTimeTaken();
+            elements.feedbackDisplay.innerHTML = feedbackHTML;
+            
+            saveQuizResult(score, questions.length);
+        }
+        
+        // حفظ نتيجة الاختبار
+        function saveQuizResult(score, totalQuestions) {
+            const result = {
+                score,
+                totalQuestions,
+                percentage: Math.round((score / totalQuestions) * 100),
+                timestamp: new Date().toISOString(),
+                timeTaken: calculateTimeTaken(),
+                year: selectedYear,
+                section: selectedSection,
+                subject: selectedSubject,
+                userId: currentUser ? currentUser.id : null,
+                userName: currentUser ? currentUser.name : 'زائر'
+            };
+            
+            const resultsRef = database.ref('quizResults');
+            resultsRef.push(result)
+                .catch(error => {
+                    console.error('Error saving quiz result:', error);
+                });
+        }
+        
+        // تنسيق الإجابة لعرضها
+        function formatAnswer(question, answer) {
+            if (!answer) return 'لم يتم الإجابة';
+            
+            if (question.type === 'mcq') {
+                return question[`option${answer}`] || answer;
+            } else {
+                return answer === 'true' ? 'صح' : 'خطأ';
+            }
+        }
+        
+        // إعادة الاختبار
+        function restartQuiz() {
+            elements.quizContainer.style.display = 'block';
+            elements.resultsContainer.style.display = 'none';
+            currentQuestionIndex = 0;
+            userAnswers = Array(questions.length).fill(null);
+            startQuiz();
+        }
+        
+        // الحصول على نص الصف الدراسي
+        function getYearText(year) {
+            switch(year) {
+                case 'prep1': return 'الصف الأول الإعدادي';
+                case 'prep2': return 'الصف الثاني الإعدادي';
+                case 'prep3': return 'الصف الثالث الإعدادي';
+                case 'first': return 'الصف الأول الثانوي';
+                case 'second': return 'الصف الثاني الثانوي';
+                case 'third': return 'الصف الثالث الثانوي';
+                default: return '';
+            }
+        }
+        
+        // الحصول على نص القسم
+        function getSectionText(section) {
+            switch(section) {
+                case 'scientific': return 'القسم العلمي';
+                case 'literary': return 'القسم الأدبي';
+                case 'arabic': return 'القسم العربي';
+                case 'islamic': return 'القسم الشرعي';
+                default: return section;
+            }
+        }
+        
+        // الحصول على أيقونة القسم
+        function getSectionIcon(section) {
+            switch(section) {
+                case 'scientific': return 'fa-atom';
+                case 'literary': return 'fa-book-open';
+                case 'arabic': return 'fa-language';
+                case 'islamic': return 'fa-mosque';
+                default: return 'fa-book';
+            }
+        }
+        
+        // عرض نافذة كلمة المرور
+        function showPasswordModal() {
+            elements.passwordModal.style.display = 'flex';
+            elements.passwordInput.focus();
+            elements.passwordError.style.display = 'none';
+        }
+        
+        // إغلاق لوحة التحكم
+        function closeAdminPanel() {
+            elements.adminPanel.classList.remove('active');
+            elements.overlay.classList.remove('active');
+        }
+        
+        // التحقق من كلمة المرور
+        function checkAdminPassword() {
+            if (elements.passwordInput.value === adminPassword) {
+                elements.passwordModal.style.display = 'none';
+                elements.adminPanel.style.display = 'block';
+                elements.adminPanel.classList.add('active');
+                elements.overlay.classList.add('active');
+                elements.passwordInput.value = '';
+                elements.passwordError.style.display = 'none';
+            } else {
+                elements.passwordError.style.display = 'block';
+            }
+        }
+        
+        // مراقبة حالة الاختبار
+        function checkExamStatus() {
+            const examStatusRef = database.ref('examStatus');
+            examStatusRef.on('value', (snapshot) => {
+                if (snapshot.exists()) {
+                    examActive = snapshot.val().active;
+                    defaultExamTime = snapshot.val().time || 10;
+                    
+                    if (!examActive) {
+                        elements.yearSelectionContainer.innerHTML = `
+                            <div class="no-questions" style="grid-column: 1 / -1;">
+                                <i class="fas fa-exclamation-triangle"></i> 
+                                <h3>الاختبارات متوقفة حالياً</h3>
+                                <p>الرجاء المحاولة لاحقاً عندما يتم تفعيل الاختبارات من قبل المسؤول</p>
+                            </div>
+                        `;
+                    }
+                } else {
+                    examStatusRef.set({
+                        active: true,
+                        time: 10
+                    });
+                }
+            });
+        }
+        
+        // المواد الدراسية لكل قسم
+        const allSubjects = {
+            scientific: [
+                { name: "الرياضيات", icon: "fa-calculator" },
+                { name: "الكيمياء", icon: "fa-flask" },
+                { name: "الفيزياء", icon: "fa-atom" },
+                { name: "الأحياء", icon: "fa-dna" },
+                { name: "اللغة العربية", icon: "fa-language" }
+            ],
+            literary: [
+                { name: "اللغة العربية", icon: "fa-language" },
+                { name: "الأدب", icon: "fa-book-open" },
+                { name: "الفقه", icon: "fa-pray" },
+                { name: "القرآن الكريم", icon: "fa-quran" },
+                { name: "الحديث", icon: "fa-hands-praying" },
+                { name: "التوحيد", icon: "fa-mosque" },
+                { name: "الجغرافيا", icon: "fa-globe" },
+                { name: "التاريخ", icon: "fa-history" },
+                { name: "المنطق", icon: "fa-brain" },
+                { name: "البلاغة", icon: "fa-scroll" },
+                { name: "الإنشاء", icon: "fa-comment" },
+                { name: "الهندسة", icon: "fa-infinity" }
+            ],
+            arabic: [
+                { name: "اللغة العربية", icon: "fa-language" },
+                { name: "النحو", icon: "fa-book" },
+                { name: "الصرف", icon: "fa-font" },
+                { name: "الأدب", icon: "fa-book-open" },
+                { name: "البلاغة", icon: "fa-scroll" }
+            ],
+            islamic: [
+                { name: "الفقه", icon: "fa-pray" },
+                { name: "القرآن الكريم", icon: "fa-quran" },
+                { name: "الحديث", icon: "fa-hands-praying" },
+                { name: "التوحيد", icon: "fa-mosque" },
+                { name: "السيرة النبوية", icon: "fa-history" }
+            ]
+        };
+        
+        // إضافة المواد الافتراضية
+        function addDefaultSubjects() {
+            const subjectsRef = database.ref('subjects');
+            
+            allSubjects.scientific.forEach(subject => {
+                subjectsRef.push({
+                    name: subject.name,
+                    section: 'scientific',
+                    icon: subject.icon,
+                    year: 'first'
+                });
+            });
+            
+            allSubjects.literary.forEach(subject => {
+                subjectsRef.push({
+                    name: subject.name,
+                    section: 'literary',
+                    icon: subject.icon,
+                    year: 'first'
+                });
+            });
+            
+            allSubjects.arabic.forEach(subject => {
+                subjectsRef.push({
+                    name: subject.name,
+                    section: 'arabic',
+                    icon: subject.icon,
+                    year: 'prep1'
+                });
+            });
+            
+            allSubjects.islamic.forEach(subject => {
+                subjectsRef.push({
+                    name: subject.name,
+                    section: 'islamic',
+                    icon: subject.icon,
+                    year: 'prep1'
+                });
+            });
+        }
+        
+        // إضافة سؤال جديد
+        function addNewQuestion() {
+            const questionText = document.getElementById('question-text').value.trim();
+            const questionType = document.getElementById('question-type').value;
+            const category = document.getElementById('question-category').value.trim();
+            const difficulty = document.getElementById('question-difficulty').value;
+            const year = document.getElementById('question-year').value;
+            const section = document.getElementById('question-section').value;
+            const subject = document.getElementById('question-subject').value;
+            
+            if (!questionText) {
+                alert('الرجاء إدخال نص السؤال');
+                return;
+            }
+            
+            let correctAnswer;
+            let questionData = {
+                text: questionText,
+                type: questionType,
+                category: category || '',
+                difficulty,
+                year,
+                section,
+                subject: subject || '',
+                createdAt: new Date().toISOString()
+            };
+            
+            if (questionType === 'mcq') {
+                correctAnswer = document.getElementById('correct-answer').value;
+                
+                for (let i = 1; i <= 4; i++) {
+                    const optionValue = document.getElementById(`option${i}`).value.trim();
+                    if (optionValue) {
+                        questionData[`option${i}`] = optionValue;
+                    }
+                }
+                
+                if (!questionData.option1 || !questionData.option2) {
+                    alert('الرجاء إدخال خيارين على الأقل');
+                    return;
+                }
+            } else {
+                correctAnswer = document.getElementById('tf-correct-answer').value;
+            }
+            
+            questionData.correctAnswer = correctAnswer;
+            
+            const questionsRef = database.ref('questions');
+            questionsRef.push(questionData)
+                .then(() => {
+                    alert('تمت إضافة السؤال بنجاح');
+                    
+                    // مسح الحقول
+                    document.getElementById('question-text').value = '';
+                    document.getElementById('question-category').value = '';
+                    for (let i = 1; i <= 4; i++) {
+                        document.getElementById(`option${i}`).value = '';
+                    }
+                })
+                .catch(error => {
+                    alert('حدث خطأ أثناء إضافة السؤال: ' + error.message);
+                });
+        }
+        
+        // حفظ إعدادات النظام
+        function saveSystemSettings() {
+            const examTime = parseInt(elements.examTime.value);
+            const examActive = elements.examStatus.checked;
+            const newAdminPassword = elements.adminPasswordSetting.value;
+            
+            if (!examTime || examTime < 1) {
+                alert('الرجاء إدخال مدة اختبار صحيحة');
+                return;
+            }
+            
+            if (!newAdminPassword) {
+                alert('الرجاء إدخال كلمة مرور إدارية');
+                return;
+            }
+            
+            const examStatusRef = database.ref('examStatus');
+            examStatusRef.set({
+                active: examActive,
+                time: examTime
+            })
+            .then(() => {
+                adminPassword = newAdminPassword;
+                localStorage.setItem('adminPassword', newAdminPassword);
+                
+                alert('تم حفظ الإعدادات بنجاح');
+            })
+            .catch(error => {
+                alert('حدث خطأ أثناء حفظ الإعدادات: ' + error.message);
+            });
+        }
+        
+        // حفظ إعدادات التليجرام
+        function saveTelegramSettings() {
+            const botToken = elements.telegramBotToken.value.trim();
+            const chatId = elements.telegramChatId.value.trim();
+            
+            if (!botToken || !chatId) {
+                alert('الرجاء إدخال التوكن ومعرف الدردشة');
+                return;
+            }
+            
+            telegramBotToken = botToken;
+            telegramChatId = chatId;
+            
+            localStorage.setItem('telegramBotToken', botToken);
+            localStorage.setItem('telegramChatId', chatId);
+            
+            alert('تم حفظ إعدادات التليجرام بنجاح');
+        }
+        
+        // حفظ إعدادات الأقسام
+        function saveSectionsSettings() {
+            const year = elements.sectionYear.value;
+            const sections = [];
+            
+            if (elements.sectionScientific.checked) sections.push('scientific');
+            if (elements.sectionLiterary.checked) sections.push('literary');
+            if (elements.sectionArabic.checked) sections.push('arabic');
+            if (elements.sectionIslamic.checked) sections.push('islamic');
+            
+            if (sections.length === 0) {
+                alert('الرجاء اختيار قسم واحد على الأقل');
+                return;
+            }
+            
+            sectionsConfig[year] = sections;
+            
+            const sectionsRef = database.ref('sectionsConfig');
+            sectionsRef.set(sectionsConfig)
+                .then(() => {
+                    alert('تم حفظ إعدادات الأقسام بنجاح');
+                })
+                .catch(error => {
+                    alert('حدث خطأ أثناء حفظ إعدادات الأقسام: ' + error.message);
+                });
+        }
+        
+        // إضافة إعلان جديد
+        function addNewAd() {
+            const title = elements.adTitle.value.trim();
+            const description = elements.adDescription.value.trim();
+            const image = elements.adImage.value.trim();
+            const linkType = elements.adLinkType.value;
+            const link = elements.adLink.value.trim();
+            const position = elements.adPosition.value;
+            const size = elements.adSize.value;
+            const design = elements.adDesign.value;
+            const status = elements.adStatus.value;
+            
+            if (!title || !description) {
+                alert('الرجاء إدخال عنوان ووصف للإعلان');
+                return;
+            }
+            
+            if (linkType !== 'none' && !link) {
+                alert('الرجاء إدخال الرابط');
+                return;
+            }
+            
+            const adData = {
+                title,
+                description,
+                image: image || '',
+                linkType: linkType !== 'none' ? linkType : '',
+                link: linkType !== 'none' ? link : '',
+                position,
+                size,
+                design,
+                status,
+                createdAt: new Date().toISOString()
+            };
+            
+            const adsRef = database.ref('ads');
+            adsRef.push(adData)
+                .then(() => {
+                    alert('تمت إضافة الإعلان بنجاح');
+                    
+                    // مسح الحقول
+                    elements.adTitle.value = '';
+                    elements.adDescription.value = '';
+                    elements.adImage.value = '';
+                    elements.adLink.value = '';
+                })
+                .catch(error => {
+                    alert('حدث خطأ أثناء إضافة الإعلان: ' + error.message);
+                });
+        }
+        
+        // حفظ إعدادات الموقع
+        function saveSiteSettings() {
+            const title = elements.siteTitle.value.trim();
+            const description = elements.siteDescription.value.trim();
+            const keywords = elements.siteKeywords.value.trim();
+            const logo = elements.siteLogo.value.trim();
+            const active = elements.siteStatus.checked;
+            const maintenanceMessage = elements.maintenanceMessage.value.trim();
+            
+            if (!title || !description || !keywords) {
+                alert('الرجاء إدخال جميع الحقول المطلوبة');
+                return;
+            }
+            
+            const siteData = {
+                title,
+                description,
+                keywords,
+                logo,
+                active,
+                maintenanceMessage
+            };
+            
+            const siteRef = database.ref('siteSettings');
+            siteRef.set(siteData)
+                .then(() => {
+                    siteSettings = siteData;
+                    document.title = siteSettings.title;
+                    
+                    alert('تم حفظ إعدادات الموقع بنجاح');
+                })
+                .catch(error => {
+                    alert('حدث خطأ أثناء حفظ إعدادات الموقع: ' + error.message);
+                });
+        }
+        
+        // إضافة مادة جديدة
+        function addNewSubject() {
+            const name = elements.editSubjectName.value.trim();
+            const year = elements.editSubjectYear.value;
+            const section = elements.editSubjectSection.value;
+            const icon = elements.editSubjectIcon.value;
+            
+            if (!name) {
+                alert('الرجاء إدخال اسم المادة');
+                return;
+            }
+            
+            const subjectData = {
+                name,
+                year,
+                section,
+                icon
+            };
+            
+            const subjectsRef = database.ref('subjects');
+            subjectsRef.push(subjectData)
+                .then(() => {
+                    alert('تمت إضافة المادة بنجاح');
+                    
+                    // مسح الحقول
+                    elements.editSubjectName.value = '';
+                })
+                .catch(error => {
+                    alert('حدث خطأ أثناء إضافة المادة: ' + error.message);
+                });
+        }
+        
+        // تبديل بين تبويبات لوحة التحكم
+        function switchAdminTab(tabId) {
+            elements.adminTabs.forEach(t => t.classList.remove('active'));
+            elements.adminTabContents.forEach(c => c.classList.remove('active'));
+            
+            document.querySelector(`.admin-tab-btn[data-tab="${tabId}"]`).classList.add('active');
+            document.getElementById(`${tabId}-tab`).classList.add('active');
+            
+            // عند التبديل إلى تبويب الإحصائيات، قم بتحديثها
+            if (tabId === 'stats') {
+                loadStats();
+            }
+        }
+        
+        // بدء التطبيق
+        document.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
