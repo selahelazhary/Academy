@@ -90,9 +90,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="header">
-            <h1>إختبارات سلاح الازهري</h1>
-        </div>
+ 
         
         <div class="content">
             <div class="loading">
@@ -102,15 +100,7 @@
             
             <div class="error" id="errorMsg">
                 <h3>⚠️ تعذر تحميل المحتوى</h3>
-                <p id="errorDetails">الملف index_quwez.html غير موجود أو لا يمكن الوصول إليه.</p>
-                <div class="instructions">
-                    <h4>لحل المشكلة على GitHub:</h4>
-                    <ol>
-                        <li>تأكد من أن الملفين موجودين في نفس المكان (Repository)</li>
-                        <li>تأكد من أن اسم الملف هو <strong>index_quwez.html</strong> تماماً</li>
-                        <li>تفعيل GitHub Pages من الإعدادات (Settings > Pages)</li>
-                        <li>اختر Branch: main و Folder: / (root)</li>
-                    </ol>
+
                 </div>
                 <button onclick="tryAgain()">إعادة المحاولة</button>
             </div>
@@ -137,15 +127,15 @@
                 .then(response => {
                     if (response.status === 404) {
                         document.getElementById('errorDetails').textContent = 
-                            'الملف غير موجود (خطأ 404). تأكد من أن الملف موجود في نفس المجلد.';
+                            'الملف غير موجود (خطأ 404). .';
                     } else if (response.status === 200) {
                         document.getElementById('errorDetails').textContent = 
-                            'الملف موجود ولكن هناك مشكلة في المحتوى. تأكد من أن الملف يحتوي على HTML صالح.';
+                            'التحقق من ان الانتر نت يعمل .';
                     }
                 })
                 .catch(error => {
                     document.getElementById('errorDetails').textContent = 
-                        'لا يمكن الوصول إلى الملف. تأكد من أن الملف موجود وأن الاسم صحيح.';
+                        'الموقع معطل مؤقتا.';
                 });
             }, 1000);
         }
