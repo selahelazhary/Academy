@@ -1,15 +1,34 @@
 <!DOCTYPE html>
-<html>
+<html lang="ar">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>إختبارات سلاح الازهري</title>
     <style>
-        body, html {
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        body, html {
             height: 100%;
             overflow: hidden;
-            font-family: Arial, sans-serif;
+        }
+        .container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        .header {
+            background: #2c3e50;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        .content {
+            flex: 1;
+            position: relative;
         }
         iframe {
             width: 100%;
@@ -17,21 +36,26 @@
             border: none;
         }
         .loading {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #f8f9fa;
             z-index: 1000;
         }
         .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
+            width: 50px;
+            height: 50px;
+            border: 5px solid #ddd;
+            border-top: 5px solid #3498db;
             border-radius: 50%;
-            border-top: 4px solid #3498db;
-            width: 40px;
-            height: 40px;
             animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
+            margin-bottom: 20px;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -39,42 +63,105 @@
         }
         .error {
             display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             text-align: center;
-            background: #fff;
             padding: 20px;
+            background: #ffecec;
+            border: 1px solid #f5aca6;
             border-radius: 5px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 20px;
+        }
+        .error button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        .instructions {
+            background: #e7f5ff;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px;
+            display: none;
         }
     </style>
 </head>
 <body>
-    <div class="loading">
-        <div class="spinner"></div>
-        <div>جاري تحميل المحتوى...</div>
+    <div class="container">
+        <div class="header">
+            <h1>إختبارات سلاح الازهري</h1>
+        </div>
+        
+        <div class="content">
+            <div class="loading">
+                <div class="spinner"></div>
+                <p>جاري تحميل المحتوى، يرجى الانتظار...</p>
+            </div>
+            
+            <div class="error" id="errorMsg">
+                <h3>⚠️ تعذر تحميل المحتوى</h3>
+                <p id="errorDetails">الملف index_quwez.html غير موجود أو لا يمكن الوصول إليه.</p>
+                <div class="instructions">
+                    <h4>لحل المشكلة على GitHub:</h4>
+                    <ol>
+                        <li>تأكد من أن الملفين موجودين في نفس المكان (Repository)</li>
+                        <li>تأكد من أن اسم الملف هو <strong>index_quwez.html</strong> تماماً</li>
+                        <li>تفعيل GitHub Pages من الإعدادات (Settings > Pages)</li>
+                        <li>اختر Branch: main و Folder: / (root)</li>
+                    </ol>
+                </div>
+                <button onclick="tryAgain()">إعادة المحاولة</button>
+            </div>
+            
+            <iframe id="mainFrame" src="index_quwez.html" onload="hideLoader()" onerror="showError()"></iframe>
+        </div>
     </div>
-    
-    <div class="error" id="errorMsg">
-        <h3>حدث خطأ في تحميل المحتوى</h3>
-        <p>تأكد من وجود ملف index_quwez.html في نفس المجلد</p>
-        <button onclick="location.reload()">إعادة المحاولة</button>
-    </div>
-
-    <iframe id="content" src="index_quwez.html" onload="document.querySelector('.loading').style.display='none'" onerror="showError()"></iframe>
 
     <script>
+        // إخفاء شاشة التحميل عند تحميل المحتوى
+        function hideLoader() {
+            document.querySelector('.loading').style.display = 'none';
+        }
+        
+        // إظهار رسالة الخطأ
         function showError() {
             document.querySelector('.loading').style.display = 'none';
             document.getElementById('errorMsg').style.display = 'block';
+            document.querySelector('.instructions').style.display = 'block';
+            
+            // محاولة تحديد سبب الخطأ
+            setTimeout(function() {
+                fetch('index_quwez.html')
+                .then(response => {
+                    if (response.status === 404) {
+                        document.getElementById('errorDetails').textContent = 
+                            'الملف غير موجود (خطأ 404). تأكد من أن الملف موجود في نفس المجلد.';
+                    } else if (response.status === 200) {
+                        document.getElementById('errorDetails').textContent = 
+                            'الملف موجود ولكن هناك مشكلة في المحتوى. تأكد من أن الملف يحتوي على HTML صالح.';
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('errorDetails').textContent = 
+                        'لا يمكن الوصول إلى الملف. تأكد من أن الملف موجود وأن الاسم صحيح.';
+                });
+            }, 1000);
         }
         
-        // إخفاء التحميل بعد 5 ثوانٍ كحد أقصى
+        // إعادة المحاولة
+        function tryAgain() {
+            document.getElementById('errorMsg').style.display = 'none';
+            document.querySelector('.loading').style.display = 'flex';
+            // إضافة طابع زمني عشوائي للتأكد من إعادة التحميل
+            document.getElementById('mainFrame').src = 'index_quwez.html?' + new Date().getTime();
+        }
+        
+        // إخفاء التحميل تلقائياً بعد 8 ثوانٍ كحد أقصى
         setTimeout(function() {
             document.querySelector('.loading').style.display = 'none';
-        }, 5000);
+        }, 8000);
     </script>
 </body>
 </html>
