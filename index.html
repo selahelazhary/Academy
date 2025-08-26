@@ -1,36 +1,80 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>إختبارات سلاح الازهري </title>
-    <meta name="description" content="نظام متكامل للاختبارات الإلكترونية لطلبة الأزهر الشريف بجميع المراحل التعليمية">
-    <meta name="keywords" content="اختبارات, الأزهر, تعليم, اختبارات إلكترونية, سلاح الأزهري">
-    <meta name="author" content="إختبارات سلاح الأزهري">
-    <link rel="icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdyuIMWOk4qbKO_qCaKOHo859JMs3To_OJjpQ8u5fU0ULewA-AdNp7Izuv9PUOIOTGTUsNM6DTVVbRWKe2OEDTBcHnxOnOrCylsq_V3YhUFPqTkPJ7XOuzWzbCXKW-UnoLEwqsE8XjaHiWPZu2dC_pESia4uQOATzelupKDAUbuO1_jH2003wsgUO0PPiO/s1080/Selah%20Elazhary%20Transperant%20logo.png">
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>إختبارات سلاح الازهري</title>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .loading {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1000;
+        }
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-radius: 50%;
+            border-top: 4px solid #3498db;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .error {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
 <body>
- 
+    <div class="loading">
+        <div class="spinner"></div>
+        <div>جاري تحميل المحتوى...</div>
+    </div>
+    
+    <div class="error" id="errorMsg">
+        <h3>حدث خطأ في تحميل المحتوى</h3>
+        <p>تأكد من وجود ملف index_quwez.html في نفس المجلد</p>
+        <button onclick="location.reload()">إعادة المحاولة</button>
+    </div>
+
+    <iframe id="content" src="index_quwez.html" onload="document.querySelector('.loading').style.display='none'" onerror="showError()"></iframe>
 
     <script>
-        // استبدل هذا بعنوان URL للملف الذي تريد استدعاءه
-        const externalContentUrl = 'index_quwez.html';
-        
-        // إنشاء iframe لعرض المحتوى الخارجي
-        const iframe = document.createElement('iframe');
-        iframe.id = 'external-content';
-        iframe.src = externalContentUrl;
-        
-        // إخفاء مؤشر التحميل وعرض المحتوى عند التحميل
-        iframe.onload = function() {
+        function showError() {
             document.querySelector('.loading').style.display = 'none';
-        };
+            document.getElementById('errorMsg').style.display = 'block';
+        }
         
-        // إضافة الـ iframe إلى الصفحة
-        document.getElementById('content-container').appendChild(iframe);
+        // إخفاء التحميل بعد 5 ثوانٍ كحد أقصى
+        setTimeout(function() {
+            document.querySelector('.loading').style.display = 'none';
+        }, 5000);
     </script>
 </body>
 </html>
