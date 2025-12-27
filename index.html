@@ -1,148 +1,60 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>اختبارات سلاح الازهري</title>
+    <title>إختبارات سلاح الأزهري - للمرحلة الثانوية الأزهرية</title>
+    
+    <!-- بيانات الموقع لتحسين محركات البحث -->
+    <meta name="description" content="إختبارات سلاح الأزهري للمرحلة الثانوية الأزهرية">
+    <meta name="author" content="Selah Elazhary">
+    <meta name="keywords" content="إختبارات, سلاح الأزهري, الثانوية الأزهرية, الأزهر, تعليم, مناهج, دروس">
+    
+    <!-- شعار للبحث -->
+    <meta property="og:image" content="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdyuIMWOk4qbKO_qCaKOHo859JMs3To_OJjpQ8u5fU0ULewA-AdNp7Izuv9PUOIOTGTUsNM6DTVVbRWKe2OEDTBcHnxOnOrCylsq_V3YhUFPqTkPJ7XOuzWzbCXKW-UnoLEwqsE8XjaHiWPZu2dC_pESia4uQOATzelupKDAUbuO1_jH2003wsgUO0PPiO/s1080/Selah%20Elazhary%20Transperant%20logo.png">
+    <meta property="og:title" content="إختبارات سلاح الأزهري - للمرحلة الثانوية الأزهرية">
+    <meta property="og:description" content="إختبارات سلاح الأزهري للمرحلة الثانوية الأزهرية">
+    <meta property="og:type" content="website">
+    
+    <!-- رابط أيقونة الموقع -->
+    <link rel="icon" href="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhdyuIMWOk4qbKO_qCaKOHo859JMs3To_OJjpQ8u5fU0ULewA-AdNp7Izuv9PUOIOTGTUsNM6DTVVbRWKe2OEDTBcHnxOnOrCylsq_V3YhUFPqTkPJ7XOuzWzbCXKW-UnoLEwqsE8XjaHiWPZu2dC_pESia4uQOATzelupKDAUbuO1_jH2003wsgUO0PPiO/s1080/Selah%20Elazhary%20Transperant%20logo.png">
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        body, html {
-            height: 100%;
-            width: 100%;
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: white;
+            color: white;
+            line-height: 1.6;
+            min-height: 100vh;
             overflow: hidden;
-            background: #000;
-        }
-        iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-        .loader {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            color: white;
-            font-family: Arial, sans-serif;
-            z-index: 1000;
-            flex-direction: column;
-        }
-        .spinner {
-            width: 50px;
-            height: 50px;
-            border: 5px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top: 5px solid #4cc9f0;
-            animation: spin 1s linear infinite;
-            margin-bottom: 20px;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .error {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            color: white;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            z-index: 1001;
-            text-align: center;
-            padding: 20px;
-        }
-        .error button {
-            background: #4cc9f0;
-            color: #000;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            margin-top: 20px;
-            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="loader" id="loader">
-        <div class="spinner"></div>
-        <p>جاري التحميل الآمن...</p>
-    </div>
-
-    
-
-    <iframe id="contentFrame" style="display:none;"></iframe>
+    <!-- iframe ليعرض الرابط المشفر -->
+    <iframe 
+        id="secureFrame" 
+        style="width: 100%; height: 100vh; border: none; position: absolute; top: 0; left: 0;"
+        sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-modals"
+        referrerpolicy="strict-origin-when-cross-origin"
+        loading="eager">
+    </iframe>
 
     <script>
-   
-        const encryptedFileName = 'aW5kZXhfcXV3ZXouaHRtbA==';
+        // الرابط المشفر ببساطة باستخدام Base64
+        const encryptedUrl = 'aHR0cHM6Ly9zZWxhaGVsYXpoYXJ5LmdpdGh1Yi5pby8uQWNhZGVteS8=';
         
-        // وظيفة فك التشفير
-        function decryptFileName(encrypted) {
-            try {
-                // فك تشفير Base64
-                return atob(encrypted);
-            } catch (error) {
-                console.error('خطأ في فك التشفير:', error);
-                return null;
-            }
-        }
-
-        // تحميل المحتوى بعد فك التشفير
-        function loadContent() {
-            const fileName = decryptFileName(encryptedFileName);
-            
-            if (!fileName) {
-                showError('خطأ في فك تشفير الملف');
-                return;
-            }
-
-            const frame = document.getElementById('contentFrame');
-            
-            // إعداد معالجات الأحداث للإطار
-            frame.onload = function() {
-                // إخفاء Loader عند التحميل الناجح
-                document.getElementById('loader').style.display = 'none';
-                frame.style.display = 'block';
-            };
-            
-            frame.onerror = function() {
-                showError('تعذر تحميل الملف: ' + fileName);
-            };
-            
-            // تعيين مصدر الإطار بعد فك التشفير
-            frame.src = fileName;
-            
-            // وقت انتظار لأقصى مدة تحميل (10 ثواني)
-            setTimeout(function() {
-                if (frame.style.display === 'none') {
-                    showError('استغرق التحميل وقتًا طويلاً');
-                }
-            }, 10000);
-        }
+        // فك التشفير البسيط
+        const originalUrl = atob(encryptedUrl);
         
-        function showError(message) {
-            document.getElementById('loader').style.display = 'none';
-            document.getElementById('errorMsg').textContent = message;
-            document.getElementById('error').style.display = 'flex';
-        }
-        
-        // بدء تحميل المحتوى عند تحميل الصفحة
-        window.onload = loadContent;
+        // تعيين الرابط في iframe
+        document.getElementById('secureFrame').src = originalUrl;
     </script>
 </body>
 </html>
